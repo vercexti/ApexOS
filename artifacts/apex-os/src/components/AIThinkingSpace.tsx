@@ -100,7 +100,7 @@ export default function AIThinkingSpace() {
   }, []);
 
   return (
-    <section className="py-24 px-6" style={{ background: "#141414" }}>
+    <section id="ai-thinking" className="py-24 px-6" style={{ background: "#141414" }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

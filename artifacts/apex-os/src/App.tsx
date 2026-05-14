@@ -5,9 +5,12 @@ import Lenis from "lenis";
 import CinematicIntro from "@/components/CinematicIntro";
 import CursorGlow from "@/components/CursorGlow";
 import Navigation from "@/components/Navigation";
+import GuidedExperience from "@/components/GuidedExperience";
+import GuidedTourBar from "@/components/GuidedTourBar";
 import CinematicPrologue from "@/components/CinematicPrologue";
 import HeroSection from "@/components/HeroSection";
 import NeuralOnboarding from "@/components/NeuralOnboarding";
+import ApexHUD from "@/components/ApexHUD";
 import AgentEcosystem from "@/components/AgentEcosystem";
 import AgentDebate from "@/components/AgentDebate";
 import AIThinkingSpace from "@/components/AIThinkingSpace";
@@ -23,22 +26,44 @@ const queryClient = new QueryClient();
 
 function ApexOS() {
   const [introComplete, setIntroComplete] = useState(false);
+  const [gatewayComplete, setGatewayComplete] = useState(false);
+  const [guidedMode, setGuidedMode] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
+  const [onboardingProfile, setOnboardingProfile] = useState<{
+    ambition?: string; stage?: string; priority?: string;
+  }>({});
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);
 
   useEffect(() => {
-    if (!introComplete) return;
+    if (!gatewayComplete) return;
     const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
     const raf = (time: number) => { lenis.raf(time); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
     return () => lenis.destroy();
-  }, [introComplete]);
+  }, [gatewayComplete]);
 
-  const handleOnboardingClose = () => {
+  const handleBeginGuided = () => {
+    setGatewayComplete(true);
+    setGuidedMode(true);
+    setTimeout(() => window.scrollTo({ top: 0 }), 50);
+  };
+
+  const handleExploreFree = () => {
+    setGatewayComplete(true);
+    setGuidedMode(false);
+    setTimeout(() => window.scrollTo({ top: 0 }), 50);
+  };
+
+  const handleOnboardingClose = (profile?: { ambition?: string; stage?: string; priority?: string }) => {
     setShowOnboarding(false);
+    if (profile) {
+      setOnboardingProfile(profile);
+      setOnboardingComplete(true);
+    }
     setTimeout(() => {
       document.querySelector("#agents")?.scrollIntoView({ behavior: "smooth" });
     }, 300);
@@ -47,23 +72,44 @@ function ApexOS() {
   return (
     <>
       <CursorGlow />
+
+      {/* Boot sequence */}
       <CinematicIntro onComplete={() => setIntroComplete(true)} />
 
+      {/* Cinematic gateway — shown after boot, before main content */}
       <AnimatePresence>
-        {showOnboarding && <NeuralOnboarding onClose={handleOnboardingClose} />}
+        {introComplete && !gatewayComplete && (
+          <GuidedExperience
+            onBeginGuided={handleBeginGuided}
+            onExploreFree={handleExploreFree}
+          />
+        )}
       </AnimatePresence>
 
-      {introComplete && (
+      {/* Neural onboarding overlay */}
+      <AnimatePresence>
+        {showOnboarding && (
+          <NeuralOnboarding
+            onClose={(profile) => handleOnboardingClose(profile)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Main OS content */}
+      {gatewayComplete && (
         <div style={{ background: "#0B0B0F" }}>
-          {/* Global scan-line grain overlay */}
+          {/* Global CRT scan-line grain */}
           <div
             className="fixed inset-0 pointer-events-none z-[50] opacity-[0.018]"
             style={{
-              backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 3px)",
+              backgroundImage:
+                "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 3px)",
               backgroundSize: "100% 4px",
             }}
           />
+
           <Navigation />
+
           <CinematicPrologue />
           <HeroSection onLaunch={() => setShowOnboarding(true)} />
           <AgentEcosystem />
@@ -76,6 +122,19 @@ function ApexOS() {
           <WorkflowUniverse />
           <FutureSelf />
           <FinalSection />
+
+          {/* Persistent APEX HUD */}
+          <ApexHUD
+            onboardingComplete={onboardingComplete}
+            onboardingProfile={onboardingProfile}
+          />
+
+          {/* Guided tour bar */}
+          <AnimatePresence>
+            {guidedMode && (
+              <GuidedTourBar onExit={() => setGuidedMode(false)} />
+            )}
+          </AnimatePresence>
         </div>
       )}
     </>

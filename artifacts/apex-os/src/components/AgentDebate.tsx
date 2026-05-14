@@ -201,6 +201,7 @@ export default function AgentDebate() {
 
   return (
     <section
+      id="agent-debate"
       className="py-24 px-6 relative overflow-hidden"
       style={{ background: "#050508" }}
     >

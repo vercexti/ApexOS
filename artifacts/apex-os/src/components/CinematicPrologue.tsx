@@ -87,6 +87,7 @@ export default function CinematicPrologue() {
 
   return (
     <section
+      id="prologue-section"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6"
       style={{ background: "#050508" }}
     >

@@ -120,7 +120,7 @@ export default function CareerCards() {
   const [selected, setSelected] = useState<typeof categories[0]["careers"][0] | null>(null);
 
   return (
-    <section className="py-24 px-6" style={{ background: "#141414" }}>
+    <section id="career-cards" className="py-24 px-6" style={{ background: "#141414" }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

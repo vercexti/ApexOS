@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
-  onClose: () => void;
+  onClose: (profile?: { ambition?: string; stage?: string; priority?: string }) => void;
 }
 
 const steps = [
@@ -296,7 +296,7 @@ export default function NeuralOnboarding({ onClose }: Props) {
                   transition={{ delay: 0.3 }}
                   whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(229,9,20,0.5)" }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={onClose}
+                  onClick={() => onClose(selections)}
                   className="px-8 py-4 rounded font-bold text-white text-base tracking-wide"
                   style={{ background: "#E50914", boxShadow: "0 0 30px rgba(229,9,20,0.4)" }}
                   data-testid="button-enter-apex"

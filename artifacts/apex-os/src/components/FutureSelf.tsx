@@ -36,7 +36,7 @@ const futures = [
 
 export default function FutureSelf() {
   return (
-    <section className="py-24 px-6" style={{ background: "#0B0B0F" }}>
+    <section id="future-self" className="py-24 px-6" style={{ background: "#0B0B0F" }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
