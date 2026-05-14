@@ -1,0 +1,461 @@
+# APEX_OS — FULL REBUILD + REFIX PROMPT FOR REPLIT
+
+You are rebuilding and fixing the existing APEX_OS website.
+Current issues:
+
+* Agent system is visually present but not actually functional.
+* Automation workflows do not trigger.
+* Thumbnail / OG image / preview image is missing.
+* Site feels visually incomplete compared to the original vision.
+* Some sections look cinematic but lack real interaction.
+* Need proper architecture instead of fake placeholders.
+
+The final goal is:
+Create a cinematic futuristic AI operating system website where every major element actually works and feels premium, strategic, reactive, and alive.
+
+The website should feel like:
+
+* Apple-level polish
+* Arc Browser motion quality
+* Linear.dev smoothness
+* Nothing.tech minimal futuristic aesthetic
+* Sci-fi command center atmosphere
+* Real AI automation dashboard
+
+---
+
+## CORE PRODUCT VISION
+
+APEX_OS is not a normal landing page.
+It is an AI Operating System for:
+
+* productivity
+* execution
+* learning
+* business growth
+* automation
+* agent orchestration
+* future simulation
+* cognitive enhancement
+
+The website should feel like entering an elite AI control system.
+
+---
+
+## MAIN FIXES REQUIRED
+
+# 1. FIX ALL AGENTS
+
+Current issue:
+Agents are static placeholders.
+
+Need:
+Every agent card must actually work.
+
+Create these agents:
+
+1. Study Agent
+
+* User enters topic
+* Agent generates:
+
+  * roadmap
+  * study breakdown
+  * revision plan
+  * practice schedule
+* Simulated streaming response
+* Beautiful terminal output
+
+2. Business Agent
+
+* User enters startup idea
+* Agent outputs:
+
+  * positioning
+  * growth strategy
+  * monetization
+  * market analysis
+
+3. Fitness Agent
+
+* Inputs:
+
+  * weight
+  * height
+  * goal
+  * activity level
+* Outputs:
+
+  * calorie targets
+  * macros
+  * workout split
+
+4. Automation Agent
+
+* User selects workflow templates
+* Simulate real workflow graph
+* Animated node execution
+* Status indicators
+* Trigger animations
+
+5. Deep Research Agent
+
+* Input prompt
+* Generate structured report UI
+* Include:
+
+  * insights
+  * trend cards
+  * strategic analysis
+  * references section
+
+IMPORTANT:
+Even if backend AI is mocked initially, the experience MUST feel real.
+
+---
+
+# 2. FIX AUTOMATION SYSTEM
+
+---
+
+Current issue:
+Automation area is dead.
+
+Need:
+Create REAL INTERACTIVE AUTOMATION UI.
+
+Features:
+
+* Workflow canvas
+* Nodes connected with animated lines
+* Drag-and-drop feel
+* Trigger buttons
+* Execution states:
+
+  * pending
+  * running
+  * completed
+  * failed
+
+Automation examples:
+
+* Study workflow
+* Content workflow
+* Startup workflow
+* Fitness workflow
+* Research workflow
+
+Each automation should:
+
+* animate in sequence
+* show execution logs
+* pulse while running
+* display success state
+
+Use:
+
+* Framer Motion
+* SVG path animations
+* glowing gradients
+* animated particles
+
+---
+
+# 3. FIX MISSING THUMBNAIL / OG IMAGE
+
+---
+
+Current issue:
+Website preview image missing when shared.
+
+Need:
+Create:
+
+* favicon
+* OG image
+* Twitter preview
+* social preview metadata
+
+OG image should include:
+
+* dark cinematic background
+* glowing red/orange neural core
+* APEX_OS logo
+* subtitle:
+  “The Operating System For Human Potential”
+* futuristic HUD style
+
+Add proper metadata:
+
+<meta property="og:title" content="APEX_OS" />
+<meta property="og:description" content="The AI Operating System For Human Potential" />
+<meta property="og:image" content="/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+Also generate:
+
+* /public/og-image.png
+* /public/favicon.ico
+* /public/apple-touch-icon.png
+
+---
+
+# 4. REBUILD HERO SECTION
+
+---
+
+Current hero is visually dark but lacks impact.
+
+Need:
+Massive cinematic immersive hero.
+
+Requirements:
+
+* Fullscreen
+* Dynamic ambient background
+* Floating neural particles
+* Cinematic red/orange glow
+* Glass HUD overlays
+* Reactive cursor lighting
+* Animated boot sequence
+* AI system diagnostics
+* Sound toggle button
+* Smooth loading transition
+
+Hero should contain:
+
+* giant APEX_OS logo
+* animated subtitle typing effect
+* system boot logs
+* CTA buttons
+* floating futuristic panels
+
+The hero should feel like:
+"Jarvis + Interstellar + Cyberpunk command center"
+
+---
+
+# 5. ADD REAL MOTION SYSTEM
+
+---
+
+Current animations are basic.
+
+Need:
+High-end motion architecture.
+
+Requirements:
+
+* Framer Motion everywhere
+* spring animations
+* smooth parallax
+* magnetic buttons
+* hover glow physics
+* cinematic transitions
+* stagger animations
+* scroll-linked motion
+* section reveals
+* particle trails
+
+NO generic fade-ins.
+
+Everything should feel engineered.
+
+---
+
+# 6. ADD LIVE AI TERMINAL
+
+---
+
+Create futuristic AI command terminal.
+
+Features:
+
+* accepts commands
+* fake AI processing animation
+* system logs
+* blinking cursor
+* command history
+* keyboard sound option
+
+Commands:
+
+* analyze
+* simulate
+* optimize
+* deploy
+* train
+* research
+* execute
+
+Terminal must feel alive.
+
+---
+
+# 7. ADD STRATEGIC DASHBOARD
+
+---
+
+Create premium dashboard section.
+
+Include:
+
+* performance cards
+* execution metrics
+* neural activity graphs
+* future prediction panels
+* agent activity streams
+* productivity heatmaps
+
+Charts must animate smoothly.
+
+Use:
+
+* Recharts
+* glowing line graphs
+* animated counters
+
+---
+
+# 8. VISUAL DESIGN RULES
+
+---
+
+STRICT DESIGN SYSTEM:
+
+Colors:
+
+* matte black background
+* deep navy gradients
+* red/orange energy glow
+* subtle white text
+* glassmorphism panels
+
+Typography:
+
+* futuristic but readable
+* massive headlines
+* cinematic spacing
+* bold system fonts
+
+UI:
+
+* rounded corners
+* layered depth
+* soft shadows
+* reflective surfaces
+* holographic feel
+
+Avoid:
+
+* generic Tailwind look
+* bright rainbow colors
+* basic SaaS layout
+* flat design
+* boring cards
+
+---
+
+# 9. PERFORMANCE OPTIMIZATION
+
+---
+
+Must optimize:
+
+* lazy loading
+* smooth scroll performance
+* GPU-friendly animations
+* reduce layout shifts
+* preload hero assets
+* optimize particles
+
+Target:
+
+* smooth on MacBook
+* smooth on mobile
+* no lag spikes
+
+---
+
+# 10. MOBILE EXPERIENCE
+
+---
+
+Mobile version must NOT be broken.
+
+Need:
+
+* responsive hero
+* adaptive typography
+* mobile command center layout
+* touch interactions
+* reduced particles for performance
+* smooth stacked sections
+
+---
+
+## TECH STACK
+
+Use:
+
+* React
+* TypeScript
+* Tailwind
+* Framer Motion
+* Lucide Icons
+* Recharts
+* Vite or Next.js
+
+Architecture:
+
+* reusable components
+* clean folder structure
+* modular animation system
+* centralized theme constants
+
+---
+
+## IMPORTANT EXECUTION RULES
+
+DO NOT:
+
+* use fake empty cards
+* leave unfinished placeholders
+* make static mock sections
+* create generic startup landing page
+
+DO:
+
+* make interactions feel real
+* add micro-interactions everywhere
+* create cinematic atmosphere
+* prioritize immersion
+* prioritize motion quality
+* prioritize polish
+
+---
+
+## FINAL EXPERIENCE GOAL
+
+The user should feel:
+“I just entered a futuristic AI operating system built by an elite startup from the future.”
+
+Everything must feel:
+
+* intelligent
+* cinematic
+* premium
+* reactive
+* immersive
+* strategic
+* alive
+
+The final product should feel worthy of:
+
+* a design competition
+* a startup launch
+* a viral showcase
+* an award-winning portfolio
+* a futuristic product reveal
+
+Now rebuild and refix the entire project accordingly.
