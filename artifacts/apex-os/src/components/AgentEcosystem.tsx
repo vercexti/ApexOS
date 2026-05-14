@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import AgentModal from "@/components/AgentModal";
 
 const agents = [
   { name: "Study Agent", desc: "Builds adaptive learning paths and detects weak areas", color: "#5865F2", icon: "◈" },
@@ -27,6 +28,7 @@ const liveActivity = [
 export default function AgentEcosystem() {
   const [activityIdx, setActivityIdx] = useState(0);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [activeAgent, setActiveAgent] = useState<string | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => setActivityIdx((i) => (i + 1) % liveActivity.length), 2500);
@@ -34,97 +36,120 @@ export default function AgentEcosystem() {
   }, []);
 
   return (
-    <section id="agents" className="py-24 px-6" style={{ background: "#0B0B0F" }}>
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <div
-            className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
-            style={{ color: "#E50914", borderColor: "rgba(229,9,20,0.3)", background: "rgba(229,9,20,0.08)" }}
-          >
-            Neural Intelligence Core · 11 Entities Online
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            Autonomous Intelligences<br />
-            <span style={{ color: "#E50914" }}>That Never Sleep</span>
-          </h2>
-          <p className="text-lg max-w-xl mx-auto" style={{ color: "#B3B3B3" }}>
-            Not tools. Not assistants. Eleven synthetic minds collaborating inside a living cognitive architecture.
-          </p>
+    <>
+      <AnimatePresence>
+        {activeAgent && (
+          <AgentModal agentName={activeAgent} onClose={() => setActiveAgent(null)} />
+        )}
+      </AnimatePresence>
 
+      <section id="agents" className="py-24 px-6" style={{ background: "#0B0B0F" }}>
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            key={activityIdx}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono"
-            style={{ color: "#B3B3B3", borderColor: "#2A2A2E", background: "#141414" }}
-            data-testid="live-activity-feed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
           >
-            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#10B981" }} />
-            {liveActivity[activityIdx]}
-          </motion.div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {agents.map((agent, i) => (
-            <motion.div
-              key={agent.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              onMouseEnter={() => setHoveredIdx(i)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              className="relative rounded-xl p-5 border cursor-default overflow-hidden group transition-all duration-300"
-              style={{
-                background: hoveredIdx === i ? "#1C1C1F" : "#141414",
-                borderColor: hoveredIdx === i ? agent.color + "60" : "#2A2A2E",
-                boxShadow: hoveredIdx === i ? `0 0 30px ${agent.color}20` : "none",
-              }}
-              data-testid={`card-agent-${i}`}
+            <div
+              className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
+              style={{ color: "#E50914", borderColor: "rgba(229,9,20,0.3)", background: "rgba(229,9,20,0.08)" }}
             >
-              {hoveredIdx === i && (
-                <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at 30% 30%, ${agent.color}10 0%, transparent 60%)` }} />
-              )}
+              Neural Intelligence Core · 11 Entities Online
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
+              Autonomous Intelligences<br />
+              <span style={{ color: "#E50914" }}>That Never Sleep</span>
+            </h2>
+            <p className="text-lg max-w-xl mx-auto mb-2" style={{ color: "#B3B3B3" }}>
+              Not tools. Not assistants. Eleven synthetic minds collaborating inside a living cognitive architecture.
+            </p>
+            <p className="text-sm" style={{ color: "#7A7A7A" }}>Click any agent to interact with it.</p>
 
-              <div className="relative z-10 flex items-start justify-between mb-3">
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold"
-                  style={{ background: agent.color + "20", color: agent.color }}
-                >
-                  {agent.icon}
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#10B981" }} />
-                  <span className="text-xs" style={{ color: "#7A7A7A" }}>Active</span>
-                </div>
-              </div>
-
-              <h3 className="relative z-10 font-bold text-sm text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>
-                {agent.name}
-              </h3>
-              <p className="relative z-10 text-xs leading-relaxed" style={{ color: "#7A7A7A" }}>
-                {agent.desc}
-              </p>
-
-              {hoveredIdx === i && (
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  className="absolute bottom-0 left-0 right-0 h-0.5 origin-left"
-                  style={{ background: `linear-gradient(90deg, ${agent.color}, transparent)` }}
-                />
-              )}
+            <motion.div
+              key={activityIdx}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono"
+              style={{ color: "#B3B3B3", borderColor: "#2A2A2E", background: "#141414" }}
+              data-testid="live-activity-feed"
+            >
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#10B981" }} />
+              {liveActivity[activityIdx]}
             </motion.div>
-          ))}
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {agents.map((agent, i) => (
+              <motion.div
+                key={agent.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                onClick={() => setActiveAgent(agent.name)}
+                className="relative rounded-xl p-5 border cursor-pointer overflow-hidden group transition-all duration-300"
+                style={{
+                  background: hoveredIdx === i ? "#1C1C1F" : "#141414",
+                  borderColor: hoveredIdx === i ? agent.color + "60" : "#2A2A2E",
+                  boxShadow: hoveredIdx === i ? `0 0 30px ${agent.color}20` : "none",
+                }}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                data-testid={`card-agent-${i}`}
+              >
+                {hoveredIdx === i && (
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at 30% 30%, ${agent.color}10 0%, transparent 60%)` }} />
+                )}
+
+                <div className="relative z-10 flex items-start justify-between mb-3">
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold"
+                    style={{ background: agent.color + "20", color: agent.color }}
+                  >
+                    {agent.icon}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#10B981" }} />
+                    <span className="text-xs" style={{ color: "#7A7A7A" }}>Active</span>
+                  </div>
+                </div>
+
+                <h3 className="relative z-10 font-bold text-sm text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>
+                  {agent.name}
+                </h3>
+                <p className="relative z-10 text-xs leading-relaxed mb-3" style={{ color: "#7A7A7A" }}>
+                  {agent.desc}
+                </p>
+
+                <motion.div
+                  animate={hoveredIdx === i ? { opacity: 1 } : { opacity: 0 }}
+                  className="relative z-10 text-[10px] font-semibold tracking-widest uppercase flex items-center gap-1"
+                  style={{ color: agent.color }}
+                >
+                  Activate Agent
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M2 5H8M5.5 2.5L8 5L5.5 7.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </motion.div>
+
+                {hoveredIdx === i && (
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    className="absolute bottom-0 left-0 right-0 h-0.5 origin-left"
+                    style={{ background: `linear-gradient(90deg, ${agent.color}, transparent)` }}
+                  />
+                )}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
