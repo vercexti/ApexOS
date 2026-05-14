@@ -11,6 +11,7 @@ import CinematicPrologue from "@/components/CinematicPrologue";
 import HeroSection from "@/components/HeroSection";
 import NeuralOnboarding from "@/components/NeuralOnboarding";
 import ApexHUD from "@/components/ApexHUD";
+import SoulSync from "@/components/SoulSync";
 import AgentEcosystem from "@/components/AgentEcosystem";
 import AgentDebate from "@/components/AgentDebate";
 import AIThinkingSpace from "@/components/AIThinkingSpace";
@@ -116,6 +117,7 @@ function ApexOS() {
 
           <CinematicPrologue />
           <HeroSection onLaunch={() => setShowOnboarding(true)} />
+          <SoulSync />
           <AgentEcosystem />
           <AgentDebate />
           <AIThinkingSpace />

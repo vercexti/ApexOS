@@ -1,0 +1,532 @@
+# SOULSYNC — MASTER FEATURE + SYSTEM PROMPT FOR REPLIT
+
+Build a completely new premium section inside APEX_OS called:
+
+# SOULSYNC
+
+Tagline:
+“The AI Companion That Stays.”
+
+SoulSync must become one of the biggest emotional and psychological pillars of the platform.
+
+This is NOT a normal chatbot.
+This is NOT a therapy replacement.
+This is NOT a generic AI assistant.
+
+SoulSync is:
+
+* an emotionally intelligent AI companion
+* a mental wellness ecosystem
+* a loneliness reduction platform
+* a recovery support system
+* a psychologist bridge platform
+* a futuristic emotional operating system
+
+The experience should feel:
+
+* emotionally safe
+* futuristic
+* deeply human
+* calming
+* cinematic
+* intelligent
+* premium
+* immersive
+
+---
+
+## POSITIONING IN WEBSITE
+
+Place SoulSync directly below the main hero section.
+
+The transition into SoulSync should feel cinematic.
+
+Hero transition idea:
+
+* particles fade into heartbeat pulses
+* neural visuals become calmer
+* ambient glow shifts from aggressive orange/red into soft purple/blue gradients
+* emotional soundtrack mode
+* subtle floating glass panels
+
+The section should immediately feel:
+“This is the most important thing on the platform.”
+
+---
+
+## MAIN FEATURE 1 — AI COMPANION
+
+This is the CORE product.
+
+The AI companion must feel:
+
+* emotionally intelligent
+* humanized
+* persistent
+* adaptive
+* conversationally advanced
+* emotionally aware
+* calm and reassuring
+
+The AI should support users struggling with:
+
+* loneliness
+* emotional stress
+* overthinking
+* ADHD
+* OCD
+* anxiety
+* demotivation
+* burnout
+* addiction struggles
+* emotional isolation
+
+IMPORTANT:
+DO NOT position this as medical treatment.
+DO NOT claim cures.
+
+Instead:
+
+* emotional support
+* guidance
+* companionship
+* structure building
+* reflection
+* emotional tracking
+* motivation support
+
+---
+
+## ONBOARDING FLOW
+
+On first launch:
+
+STEP 1:
+Ask:
+“Who are you?”
+
+Options:
+
+* Student
+* Professional
+* Creator
+* Athlete
+* Other
+* Psychologist
+
+STEP 2:
+Minimal verification.
+Do NOT make onboarding long.
+
+STEP 3:
+Ask:
+“What are you currently struggling with?”
+
+Options:
+
+* Anxiety
+* ADHD
+* OCD
+* Loneliness
+* Motivation
+* Stress
+* Burnout
+* Addiction struggles
+* Sleep issues
+* Emotional pressure
+* Other
+
+There must also be:
+
+* huge customizable description box
+* user can explain everything freely
+* this becomes the contextual AI memory prompt
+
+STEP 4:
+Micro-assessment quests.
+
+Examples:
+
+* focus level
+* stress level
+* emotional energy
+* social comfort
+* sleep quality
+* daily consistency
+
+STEP 5:
+Generate:
+
+* emotional profile
+* support roadmap
+* AI interaction style
+* daily growth path
+
+The onboarding should feel futuristic and emotional.
+
+---
+
+## AI CHAT SYSTEM
+
+The AI chat must feel alive.
+
+Features:
+
+* streaming responses
+* realistic typing
+* emotion-aware UI
+* memory continuity
+* adaptive conversation style
+* long-term context retention
+* companion personality evolution
+
+The AI should:
+
+* remember previous emotional states
+* reference past conversations naturally
+* adapt tone to user mood
+* talk differently during stress vs calm periods
+
+Examples:
+
+* calm mode
+* motivational mode
+* grounding mode
+* focus mode
+* reflective mode
+
+---
+
+## VOICE + VIDEO AI SYSTEM
+
+Create futuristic voice/video AI interface.
+
+Features:
+
+* voice calling with AI
+* video call UI with AI avatar
+* animated waveform
+* glowing neural orb
+* ambient breathing animation
+* realistic AI listening states
+* reactive UI lighting while speaking
+
+When AI speaks:
+
+* orb pulses
+* particles react to audio
+* subtitles appear live
+* emotional tone color changes subtly
+
+Video mode should simulate:
+
+* emotional understanding
+* environment awareness
+* posture/emotion cues
+
+NOT creepy.
+Must feel premium and emotionally intelligent.
+
+---
+
+## DAILY RECOVERY SYSTEM
+
+Create a full emotional growth ecosystem.
+
+Features:
+
+* mood tracking
+* daily check-ins
+* recovery streaks
+* reflection journaling
+* emotional milestones
+* small improvement quests
+* breathing exercises
+* grounding exercises
+* focus timers
+* recovery insights
+
+Examples:
+“Today’s Quest”
+
+* Go outside for 10 minutes
+* Drink water
+* Finish one task
+* Avoid doomscrolling for 30 minutes
+* Write one honest thought
+
+Completion animations should feel rewarding.
+
+---
+
+## SMART GUIDANCE ENGINE
+
+Depending on user struggles:
+
+ADHD MODE:
+
+* focus sprint system
+* micro task breakdowns
+* dopamine-friendly UI
+* distraction reduction prompts
+
+OCD SUPPORT MODE:
+
+* grounding prompts
+* calming exercises
+* journaling support
+* reassurance avoidance guidance
+
+ANXIETY MODE:
+
+* breathing guidance
+* grounding animations
+* calm UI states
+* thought organization tools
+
+MOTIVATION MODE:
+
+* progress tracking
+* small win system
+* encouragement engine
+* habit rebuilding
+
+---
+
+## SELF INSPECTION REPORTS
+
+Generate beautiful futuristic reports.
+
+Include:
+
+* emotional trend graphs
+* stress heatmaps
+* mood patterns
+* recovery consistency
+* AI observations
+* progress summaries
+* emotional triggers
+* focus analytics
+
+Use:
+
+* glowing graphs
+* animated charts
+* cinematic dashboard UI
+
+The reports should feel:
+“Your emotional operating system analysis.”
+
+---
+
+## MAIN FEATURE 2 — VERIFIED PSYCHOLOGIST SYSTEM
+
+This is the SECOND CORE FEATURE.
+
+Problem being solved:
+People often:
+
+* cannot open up to family
+* cannot access expensive therapists
+* fear fake/unverified professionals
+* feel emotionally isolated
+
+SoulSync solves this with:
+
+* verified psychologists
+* intern/fresher professionals
+* affordable sessions
+* AI-assisted emotional context
+
+---
+
+## PSYCHOLOGIST ONBOARDING
+
+Psychologists have separate login flow.
+
+Verification includes:
+
+* degree verification
+* intern verification
+* identity verification
+* specialization selection
+
+After verification:
+Psychologist gets access to:
+
+* dashboard
+* assigned users
+* AI-generated emotional reports
+* messaging
+* voice/video sessions
+* analytics
+
+---
+
+## PSYCHOLOGIST DASHBOARD
+
+Dashboard includes:
+
+* patient cards
+* emotional trend reports
+* AI interaction summaries
+* risk escalation alerts
+* recent conversations
+* appointment management
+* session history
+* analytics
+
+Visual style:
+
+* futuristic medical dashboard
+* cinematic glass UI
+* neural analytics
+* premium charts
+
+---
+
+## AI + PSYCHOLOGIST INTEGRATION
+
+IMPORTANT FEATURE:
+With user permission,
+psychologists can view:
+
+* AI conversation history
+* emotional trend summaries
+* progress reports
+* recurring emotional patterns
+
+This creates:
+
+* better context
+* faster understanding
+* more personalized sessions
+
+Must include:
+
+* privacy controls
+* consent system
+* secure access UI
+
+---
+
+## PSYCHOLOGIST COMMUNICATION SYSTEM
+
+Features:
+
+* secure chat
+* voice calls
+* video calls
+* session scheduling
+* live notes
+* emotional tagging
+
+Call modes:
+
+* emergency support
+* quick session
+* deep consultation
+* motivation session
+
+---
+
+## MUSIC + AMBIENT SYSTEM
+
+Add immersive ambient sound system.
+
+Features:
+
+* floating music player
+* calm ambient tracks
+* emotional soundscapes
+* focus music
+* sleep ambience
+* breathing sync audio
+
+UI:
+
+* floating glass soundbar
+* waveform animations
+* always-accessible mini player
+
+---
+
+## VISUAL DESIGN LANGUAGE
+
+SoulSync should visually feel different from the aggressive APEX_OS sections.
+
+Use:
+
+* dark cinematic backgrounds
+* purple/blue emotional gradients
+* soft neural glows
+* floating particles
+* glassmorphism
+* subtle emotional lighting
+* breathing animations
+* calming motion system
+
+Avoid:
+
+* generic healthcare app UI
+* bright hospital aesthetics
+* boring dashboards
+* flat designs
+
+---
+
+## MOTION SYSTEM
+
+Use:
+
+* Framer Motion
+* smooth cinematic transitions
+* breathing animations
+* emotional pulse effects
+* hover physics
+* floating cards
+* scroll-linked storytelling
+
+Everything should feel:
+
+* alive
+* emotionally responsive
+* calming
+* premium
+
+---
+
+## IMPORTANT ETHICAL RULES
+
+The platform MUST:
+
+* encourage professional help when needed
+* avoid claiming cures
+* avoid manipulative dependency
+* prioritize user safety
+* include crisis/help resources
+* maintain privacy and consent
+
+The AI should NEVER pretend to be a licensed doctor.
+
+---
+
+## FINAL EXPERIENCE GOAL
+
+The user should feel:
+“I finally have a place where I am understood.”
+
+SoulSync should feel like:
+
+* futuristic emotional intelligence
+* a deeply supportive AI companion
+* a bridge between technology and real human care
+* a premium next-generation mental wellness ecosystem
+
+The final experience should feel worthy of:
+
+* a startup launch
+* a global mental wellness platform
+* a futuristic product showcase
+* a design competition winner
+* an emotionally unforgettable experience
