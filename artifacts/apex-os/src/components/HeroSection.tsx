@@ -1,13 +1,17 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
+interface Props {
+  onLaunch: () => void;
+}
+
 const floatingStats = [
   { label: "Futures Shaped", value: "12,847" },
   { label: "Decisions Guided", value: "3.2M" },
   { label: "AI Agents Active", value: "99" },
 ];
 
-export default function HeroSection() {
+export default function HeroSection({ onLaunch }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -213,7 +217,7 @@ export default function HeroSection() {
             className="px-8 py-4 rounded text-white font-bold text-base tracking-wide"
             style={{ background: "#E50914", boxShadow: "0 0 24px rgba(229,9,20,0.35)" }}
             data-testid="button-launch"
-            onClick={() => document.querySelector("#agents")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={onLaunch}
           >
             Launch APEX OS
           </motion.button>
