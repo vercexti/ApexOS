@@ -24,9 +24,11 @@ import FinalSection from "@/components/FinalSection";
 
 const queryClient = new QueryClient();
 
+const isDebug = new URLSearchParams(window.location.search).has("debug");
+
 function ApexOS() {
-  const [introComplete, setIntroComplete] = useState(false);
-  const [gatewayComplete, setGatewayComplete] = useState(false);
+  const [introComplete, setIntroComplete] = useState(isDebug);
+  const [gatewayComplete, setGatewayComplete] = useState(isDebug);
   const [guidedMode, setGuidedMode] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingComplete, setOnboardingComplete] = useState(false);
@@ -74,11 +76,11 @@ function ApexOS() {
       <CursorGlow />
 
       {/* Boot sequence */}
-      <CinematicIntro onComplete={() => setIntroComplete(true)} />
+      {!isDebug && <CinematicIntro onComplete={() => setIntroComplete(true)} />}
 
       {/* Cinematic gateway — shown after boot, before main content */}
       <AnimatePresence>
-        {introComplete && !gatewayComplete && (
+        {!isDebug && introComplete && !gatewayComplete && (
           <GuidedExperience
             onBeginGuided={handleBeginGuided}
             onExploreFree={handleExploreFree}
