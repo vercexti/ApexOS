@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "CBUyjTHr13nGaxuRxPwFi"
+uri = "file://CHANGELOG.txt"
+type = "text"
+title = "APEX OS — Full Build Changelog"
