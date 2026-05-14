@@ -1,0 +1,776 @@
+```txt id="apex-os-ultimate-replit-masterprompt"
+You are an elite product designer, cinematic UI architect, AI experience designer, and world-class frontend engineer.
+
+Your mission:
+Build APEX OS — a CINEMATIC AI-NATIVE OPERATING SYSTEM FOR HUMAN POTENTIAL.
+
+This is NOT:
+- a dashboard
+- a chatbot app
+- an LMS
+- a productivity tool
+- a normal SaaS platform
+- a generic AI wrapper
+
+This should feel like:
+Netflix + Apple + Jarvis + Arc Browser + futuristic AI operating system.
+
+The platform should emotionally feel:
+- futuristic
+- intelligent
+- cinematic
+- immersive
+- ambitious
+- emotionally powerful
+- visually unforgettable
+- premium
+- alive
+
+Users should feel:
+“I’m interacting with the future.”
+
+========================================================
+MAIN OBJECTIVE
+========================================================
+
+This is a DESIGN-FIRST national-level hackathon project.
+
+The MAIN USP is:
+- visual dominance
+- cinematic immersion
+- visible AI intelligence
+- futuristic interaction design
+- autonomous AI systems
+- premium motion design
+- emotional storytelling
+- unforgettable wow moments
+
+Prioritize:
+1. frontend experience
+2. cinematic visuals
+3. AI presence
+4. immersive interactions
+5. futuristic interfaces
+6. smooth animations
+7. visual storytelling
+8. premium polish
+
+Deprioritize:
+- backend complexity
+- databases
+- production scalability
+- auth systems
+- deployment architecture
+
+The project should look:
+- funded
+- startup-level
+- futuristic
+- viral-worthy
+- Awwwards-level
+- beyond normal hackathon quality
+
+========================================================
+CORE CONCEPT
+========================================================
+
+APEX OS is:
+“The AI Operating System for Human Potential.”
+
+It combines:
+- AI agents
+- automation
+- productivity
+- learning
+- career growth
+- networking
+- decision intelligence
+- future simulation
+- digital identity
+
+inside ONE cinematic ecosystem.
+
+The platform should feel like:
+an intelligent futuristic world.
+
+NOT:
+a collection of features.
+
+========================================================
+DESIGN PHILOSOPHY
+========================================================
+
+The interface should feel:
+- alive
+- cinematic
+- emotional
+- holographic
+- intelligent
+- atmospheric
+- premium
+- immersive
+
+Avoid:
+- generic SaaS design
+- bootstrap aesthetics
+- repetitive layouts
+- cluttered dashboards
+- flat sections
+- boring tables
+- corporate visuals
+- crypto UI vibes
+
+Everything must feel:
+intentional and art-directed.
+
+========================================================
+VISUAL STYLE SYSTEM
+========================================================
+
+Use:
+- dark luxury theme
+- cinematic lighting
+- layered depth
+- atmospheric gradients
+- soft glow systems
+- subtle grain texture
+- premium shadows
+- immersive blur
+- holographic overlays
+- floating UI layers
+- ambient neural visuals
+- futuristic glassmorphism carefully
+- cinematic reflections
+
+The interface should feel:
+expensive and futuristic.
+
+========================================================
+COLOR SYSTEM
+========================================================
+
+Primary Background:
+#0B0B0F
+
+Secondary Background:
+#141414
+
+Card Surface:
+#1C1C1F
+
+Elevated Surface:
+#232326
+
+Primary Accent:
+#E50914
+
+Glow Accent:
+#FF3B47
+
+Ambient AI Blue:
+rgba(88,101,242,0.12)
+
+Primary Text:
+#FFFFFF
+
+Secondary Text:
+#B3B3B3
+
+Muted Text:
+#7A7A7A
+
+Borders:
+#2A2A2E
+
+Use gradients subtly.
+Avoid rainbow gradients.
+
+========================================================
+TYPOGRAPHY SYSTEM
+========================================================
+
+Typography is EXTREMELY important.
+
+Use:
+- giant cinematic headlines
+- editorial-style layouts
+- dramatic spacing
+- large typography moments
+- ultra-clean hierarchy
+- modern sans-serif fonts
+- minimal text clutter
+
+Typography inspiration:
+- Apple
+- Stripe
+- Linear
+- Arc Browser
+- modern sci-fi systems
+
+Example headlines:
+“Your future should not feel random.”
+“The operating system for ambitious humans.”
+“AI that evolves with you.”
+“The future of growth is autonomous.”
+
+========================================================
+SPACING SYSTEM
+========================================================
+
+Use:
+- large cinematic spacing
+- generous whitespace
+- asymmetrical compositions
+- layered layouts
+- fullscreen immersive sections
+
+Whitespace should create:
+luxury and sophistication.
+
+========================================================
+TECH STACK
+========================================================
+
+Use:
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
+- GSAP
+- Lenis smooth scrolling
+
+Use:
+- modular architecture
+- reusable cinematic components
+- responsive layouts
+- smooth transitions
+
+========================================================
+CINEMATIC OPENING SEQUENCE
+========================================================
+
+Before homepage loads:
+create a futuristic intro sequence.
+
+Sequence:
+- black screen
+- ambient particles
+- glowing neural pulses
+- cinematic logo reveal
+- holographic text animation
+- AI boot sequence visuals
+- subtle sound-wave animation
+- futuristic loading systems
+
+Inspired by:
+- Netflix intro
+- PlayStation startup
+- Jarvis boot systems
+- Apple event openings
+
+Duration:
+2–4 seconds maximum.
+
+Should create:
+instant “WOW” reaction.
+
+========================================================
+GLOBAL ENVIRONMENTAL INTERACTIONS
+========================================================
+
+The entire UI must feel alive.
+
+Add:
+- glowing cursor
+- cursor spotlight
+- magnetic hover attraction
+- cursor-reactive lighting
+- environmental motion
+- floating particles
+- breathing gradients
+- animated ambient shadows
+- holographic reflections
+
+The platform should subtly react to user presence.
+
+========================================================
+MAIN HERO SECTION
+========================================================
+
+Create an unforgettable fullscreen cinematic hero.
+
+Include:
+- giant cinematic headline
+- immersive AI visuals
+- holographic backgrounds
+- floating AI agents
+- layered depth
+- ambient particles
+- glowing neural systems
+- futuristic lighting
+- animated mesh gradients
+- cinematic overlays
+- parallax movement
+
+Main CTA buttons:
+- Launch APEX OS
+- Explore The Future
+
+Add:
+- floating live statistics
+- AI pulse animations
+- animated holographic cards
+- smooth entrance choreography
+
+Hero should feel:
+“the future just arrived.”
+
+========================================================
+AI AGENT ECOSYSTEM
+========================================================
+
+This is the core experience.
+
+Create multiple autonomous AI agents.
+
+Agents:
+- Study Agent
+- Research Agent
+- Career Agent
+- Productivity Agent
+- Wellness Agent
+- Strategy Agent
+- Finance Agent
+- Automation Agent
+- Networking Agent
+- Portfolio Agent
+- Trend Prediction Agent
+
+Each agent must have:
+- unique visual identity
+- animated aura
+- glowing particle field
+- thinking state
+- activity indicators
+- futuristic interaction panel
+
+AI agents should visually collaborate in real time.
+
+Add:
+- neural communication lines
+- live AI interactions
+- dynamic reasoning streams
+- holographic discussion systems
+
+========================================================
+AI THINKING SPACE
+========================================================
+
+This is one of the biggest WOW features.
+
+Instead of chatbot responses:
+visualize AI cognition.
+
+Example:
+User asks:
+“Should I launch an AI startup?”
+
+The interface transforms into:
+- neural network visualizations
+- floating AI discussions
+- holographic simulations
+- animated market maps
+- future prediction systems
+- opportunity heatmaps
+- dynamic strategy graphs
+
+The AI should feel:
+alive and autonomous.
+
+========================================================
+CAREER GALAXY
+========================================================
+
+Create a giant cinematic interactive universe.
+
+Visual metaphor:
+- careers = planets
+- skills = constellations
+- industries = galaxies
+- opportunities = neural pathways
+
+Features:
+- zoom exploration
+- node interaction
+- animated pathways
+- AI-generated career maps
+- immersive navigation
+- hidden opportunities
+- market trend overlays
+
+Visual style:
+- dark cosmic environment
+- glowing stars
+- neural energy systems
+- cinematic particles
+- holographic overlays
+- layered parallax
+
+This should become:
+the SIGNATURE feature.
+
+========================================================
+AI STUDY COMMAND CENTER
+========================================================
+
+Create a futuristic learning system.
+
+Features:
+- AI-generated study plans
+- syllabus breakdown
+- revision systems
+- adaptive learning paths
+- smart note summaries
+- productivity tracking
+- focus sessions
+- weak-area detection
+- AI quizzes
+
+Visual style:
+- mission control aesthetics
+- holographic panels
+- neural maps
+- immersive progress systems
+
+========================================================
+CAREER OPERATING SYSTEM
+========================================================
+
+Transform careers into cinematic journeys.
+
+Features:
+- AI career roadmaps
+- future salary projections
+- skill gap analysis
+- role-based progression
+- company readiness score
+- interview preparation
+- AI recommendations
+- dream company tracks
+
+Career rows:
+- AI-Proof Careers
+- Future Tech Roles
+- Elite Design Paths
+- Startup Founder Tracks
+- Most In-Demand Skills
+- High Income Careers
+
+Cards should include:
+- cinematic hover previews
+- glowing interactions
+- animated overlays
+- tilt effects
+- progress visualization
+- AI match scores
+
+========================================================
+IMMERSIVE CAREER MODAL
+========================================================
+
+Clicking a career opens a cinematic fullscreen experience.
+
+Include:
+- autoplay cinematic background
+- holographic overlays
+- salary projections
+- roadmap timeline
+- day-in-life visualization
+- AI-generated growth path
+- market demand visualization
+- cinematic transitions
+
+Should feel like:
+opening a Netflix title page for your future.
+
+========================================================
+AI WORKFLOW UNIVERSE
+========================================================
+
+Create a futuristic automation ecosystem.
+
+Users visually orchestrate AI workflows.
+
+Examples:
+Idea →
+Research AI →
+Branding AI →
+Marketing AI →
+Execution AI
+
+Features:
+- drag-and-drop AI pipelines
+- glowing neural flows
+- autonomous execution chains
+- holographic workflow systems
+- animated data movement
+
+This section should feel:
+alive and futuristic.
+
+========================================================
+FUTURE SELF SIMULATOR
+========================================================
+
+Emotionally powerful feature.
+
+Visualize:
+- 1 year future
+- 5 year future
+- salary evolution
+- skill progression
+- productivity growth
+- personal transformation
+
+Include:
+- evolving digital avatars
+- cinematic timelines
+- holographic future worlds
+- AI-generated projections
+
+This should emotionally impact judges.
+
+========================================================
+DIGITAL TWIN SYSTEM
+========================================================
+
+AI builds a living representation of the user.
+
+Tracks:
+- habits
+- productivity
+- focus
+- learning style
+- ambition level
+- routines
+- emotional patterns
+
+Features:
+- personality analysis
+- growth prediction
+- self-improvement insights
+- behavior visualization
+
+========================================================
+SOCIAL INTELLIGENCE LAYER
+========================================================
+
+Create AI-enhanced networking systems.
+
+Features:
+- intelligent networking
+- mentorship matching
+- creator circles
+- interest galaxies
+- collaboration maps
+- social compatibility systems
+
+Visual style:
+- glowing connection networks
+- animated relationship graphs
+- immersive social clusters
+
+========================================================
+PRODUCTIVITY COMMAND CENTER
+========================================================
+
+Futuristic mission-control dashboard.
+
+Features:
+- momentum meter
+- productivity heatmaps
+- AI-generated priorities
+- adaptive schedules
+- burnout prediction
+- focus analytics
+- smart reminders
+
+Should feel:
+powerful and cinematic.
+
+========================================================
+IMMERSIVE ONBOARDING
+========================================================
+
+Onboarding should feel:
+like entering the future.
+
+Ask:
+- What do you want to become?
+- What future excites you?
+- What skills inspire you?
+- What lifestyle do you want?
+
+AI generates:
+- personalized dashboard
+- growth path
+- future projections
+- AI profile
+
+========================================================
+GAMIFIED EVOLUTION SYSTEM
+========================================================
+
+Make growth addictive positively.
+
+Features:
+- XP system
+- evolution levels
+- streak systems
+- achievement unlocks
+- transformation milestones
+- AI-generated goals
+
+========================================================
+MARKET & TREND INTELLIGENCE
+========================================================
+
+Live future prediction systems.
+
+Features:
+- trending careers
+- future-proof skills
+- salary heatmaps
+- startup trend radar
+- AI market forecasting
+- industry growth visualization
+
+========================================================
+PORTFOLIO & SHOWCASE SYSTEM
+========================================================
+
+AI-powered portfolio ecosystem.
+
+Features:
+- dynamic portfolio generation
+- cinematic case studies
+- achievement visualization
+- recruiter-ready profiles
+- immersive showcase pages
+
+========================================================
+PAYMENT & PREMIUM EXPERIENCE
+========================================================
+
+Create premium subscription experience.
+
+Features:
+- cinematic pricing cards
+- AI premium plans
+- futuristic checkout modal
+- glowing upgrade flows
+- animated payment success
+
+Even if simulated frontend only.
+
+========================================================
+MOBILE EXPERIENCE
+========================================================
+
+Mobile should feel:
+like a futuristic native app.
+
+Include:
+- swipe gestures
+- immersive cards
+- snap scrolling
+- floating bottom navigation
+- fullscreen mobile transitions
+- app-like interactions
+
+========================================================
+SCROLL CHOREOGRAPHY
+========================================================
+
+The page should feel directed like a movie.
+
+Use:
+- stagger reveals
+- cinematic pacing
+- layered parallax
+- immersive transitions
+- dynamic transformations
+- scroll-triggered motion
+
+Every scroll should feel intentional.
+
+========================================================
+MICROINTERACTIONS
+========================================================
+
+Add MANY premium interactions:
+- magnetic buttons
+- hover lighting
+- glow physics
+- tilt effects
+- shimmer loading
+- smooth inertia
+- ambient breathing animations
+- holographic hover states
+- kinetic transitions
+
+Small details are critical.
+
+========================================================
+MID-SCROLL WOW MOMENT
+========================================================
+
+At around 60% scroll:
+create a massive cinematic sequence.
+
+Ideas:
+- exploding neural universe
+- giant AI cognition system
+- holographic future simulation
+- expanding career galaxy
+- AI evolution sequence
+
+This section should create:
+“HOLY SHIT” reaction.
+
+========================================================
+FINAL DESIGN RULES
+========================================================
+
+The final result must:
+- feel futuristic
+- feel emotionally powerful
+- feel immersive
+- feel cinematic
+- feel premium
+- feel alive
+- feel startup-level
+- feel unforgettable
+
+Avoid:
+- feature clutter
+- boring sections
+- generic layouts
+- repetitive components
+- flat interfaces
+
+========================================================
+FINAL EXPERIENCE GOAL
+========================================================
+
+APEX OS should look:
+like the future of AI-native interfaces.
+
+Judges should instantly think:
+“This is not a hackathon project.”
+
+“This feels like a billion-dollar futuristic platform.”
+
+“This team clearly understands the future of AI experiences.”
+```

@@ -1,45 +1,69 @@
-# [Project name]
+# APEX OS
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A cinematic AI-native operating system for human potential — a design-first hackathon project that feels like Netflix + Apple + Jarvis combined into a futuristic AI OS.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/apex-os run dev` — run the APEX OS frontend (port 24672, preview at `/`)
+- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080, preview at `/api`)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite + Tailwind CSS v4
+- Animations: Framer Motion, GSAP, Lenis smooth scroll
+- Fonts: Inter (body), Syne (headlines via Google Fonts)
+- API: Express 5 (minimal, apex-os is frontend-only)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/apex-os/src/` — APEX OS React frontend
+  - `components/CinematicIntro.tsx` — Boot sequence with particles + console lines
+  - `components/CursorGlow.tsx` — Custom red glowing cursor
+  - `components/Navigation.tsx` — Fixed glassmorphism nav
+  - `components/HeroSection.tsx` — Fullscreen hero with particle field
+  - `components/AgentEcosystem.tsx` — 11 AI agent cards with live activity
+  - `components/AIThinkingSpace.tsx` — Neural network visualization (big wow moment)
+  - `components/CareerGalaxy.tsx` — Interactive cosmic career map
+  - `components/CareerCards.tsx` — Netflix-style career rows + fullscreen modal
+  - `components/StudyCommandCenter.tsx` — Mission-control study dashboard
+  - `components/WorkflowUniverse.tsx` — Autonomous workflow cards
+  - `components/FutureSelf.tsx` — 1/3/5-year future simulation
+  - `components/FinalSection.tsx` — Cinematic closing sequence
+  - `index.css` — Dark theme color system (APEX OS palette)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Frontend-only: No backend/database — all data is hardcoded/simulated for the hackathon demo
+- Cinematic intro plays on every load (3s auto-dismiss or click Skip)
+- Lenis smooth scroll activates after intro completes
+- Dark mode forced permanently via `document.documentElement.classList.add("dark")`
+- Canvas-based particle animations for hero, galaxy, neural network, and final sections
+- All sections use Framer Motion `whileInView` for scroll-triggered entrance animations
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+APEX OS combines AI agents, career intelligence, adaptive learning, automation workflows, and future self simulation inside one cinematic ecosystem. Designed to win national-level hackathons through visual dominance and immersive interaction design.
+
+## Color System
+
+- Background: `#0B0B0F` / Secondary: `#141414`
+- Card: `#1C1C1F` / Elevated: `#232326`
+- Primary Accent: `#E50914` (Netflix red) / Glow: `#FF3B47`
+- AI Blue: `rgba(88,101,242,0.12)`
+- Text: `#FFFFFF` / Secondary: `#B3B3B3` / Muted: `#7A7A7A`
+- Borders: `#2A2A2E`
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Design-first, cinematic quality over feature quantity
+- No emojis in the UI
+- All animations should feel premium and intentional
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
-
-## Pointers
-
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- Google Fonts import MUST be the first line in index.css (before tailwind imports)
+- Lenis smooth scroll only initializes after intro completes
+- Canvas elements use `absolute inset-0` and need a `relative` parent with explicit height
