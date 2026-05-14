@@ -48,14 +48,14 @@ export default function FutureSelf() {
             className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
             style={{ color: "#F59E0B", borderColor: "rgba(245,158,11,0.3)", background: "rgba(245,158,11,0.08)" }}
           >
-            Future Self Simulation
+            Future Self Observatory · Simulation Running
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            Meet Your<br />
-            <span style={{ color: "#F59E0B" }}>Future Self</span>
+            The Versions of You<br />
+            <span style={{ color: "#F59E0B" }}>That Could Exist</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#B3B3B3" }}>
-            AI-simulated projections based on your trajectory. Not predictions — possibilities you can build toward.
+            12,000 simulations run. Three futures emerged. Each one is yours to claim.
           </p>
         </motion.div>
 

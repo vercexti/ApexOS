@@ -47,14 +47,14 @@ export default function AgentEcosystem() {
             className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
             style={{ color: "#E50914", borderColor: "rgba(229,9,20,0.3)", background: "rgba(229,9,20,0.08)" }}
           >
-            AI Agent Ecosystem
+            Neural Intelligence Core · 11 Entities Online
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            11 Autonomous Agents<br />
-            <span style={{ color: "#E50914" }}>Working For You</span>
+            Autonomous Intelligences<br />
+            <span style={{ color: "#E50914" }}>That Never Sleep</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#B3B3B3" }}>
-            Not tools. Not assistants. Autonomous intelligences that never stop optimizing your potential.
+            Not tools. Not assistants. Eleven synthetic minds collaborating inside a living cognitive architecture.
           </p>
 
           <motion.div

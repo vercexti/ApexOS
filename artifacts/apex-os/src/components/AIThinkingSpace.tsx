@@ -112,14 +112,14 @@ export default function AIThinkingSpace() {
             className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
             style={{ color: "#5865F2", borderColor: "rgba(88,101,242,0.3)", background: "rgba(88,101,242,0.08)" }}
           >
-            AI Thinking Space
+            Synthetic Cognition Chamber · Live
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            Watch AI Think<br />
-            <span style={{ color: "#5865F2" }}>In Real Time</span>
+            Cognition Made<br />
+            <span style={{ color: "#5865F2" }}>Visible</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#B3B3B3" }}>
-            Not a chatbot. An intelligence that visualizes its own cognition.
+            Not a chatbot. An intelligence that externalizes its own reasoning — in real time.
           </p>
         </motion.div>
 

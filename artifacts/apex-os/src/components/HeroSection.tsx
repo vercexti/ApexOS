@@ -98,6 +98,74 @@ export default function HeroSection() {
 
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(88,101,242,0.06) 0%, transparent 70%)" }} />
 
+      {/* Floating holographic UI cards — background depth layer */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-left floating card */}
+        <motion.div
+          animate={{ y: [0, -12, 0], rotate: [-2, 0, -2] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[18%] left-[4%] w-44 rounded-xl border p-3 hidden lg:block"
+          style={{ background: "rgba(20,20,20,0.7)", borderColor: "rgba(88,101,242,0.25)", backdropFilter: "blur(12px)" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#5865F2" }} />
+            <span className="text-[10px] font-mono" style={{ color: "#7A7A7A" }}>Study Agent</span>
+          </div>
+          <div className="text-xs font-bold text-white mb-1">Neural Plan Ready</div>
+          <div className="w-full h-1 rounded-full overflow-hidden" style={{ background: "#2A2A2E" }}>
+            <motion.div animate={{ width: ["20%", "78%"] }} transition={{ duration: 3, delay: 1 }} className="h-full rounded-full" style={{ background: "#5865F2" }} />
+          </div>
+          <div className="text-[10px] mt-1" style={{ color: "#7A7A7A" }}>78% optimized</div>
+        </motion.div>
+
+        {/* Top-right floating card */}
+        <motion.div
+          animate={{ y: [0, 10, 0], rotate: [1.5, -1, 1.5] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-[14%] right-[5%] w-44 rounded-xl border p-3 hidden lg:block"
+          style={{ background: "rgba(20,20,20,0.7)", borderColor: "rgba(229,9,20,0.2)", backdropFilter: "blur(12px)" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#E50914" }} />
+            <span className="text-[10px] font-mono" style={{ color: "#7A7A7A" }}>Career Agent</span>
+          </div>
+          <div className="text-xs font-bold text-white mb-1">AI Match Score</div>
+          <div className="text-xl font-black" style={{ color: "#E50914", fontFamily: "'Syne', sans-serif" }}>94%</div>
+          <div className="text-[10px]" style={{ color: "#7A7A7A" }}>AI Engineer · Remote</div>
+        </motion.div>
+
+        {/* Bottom-left floating card */}
+        <motion.div
+          animate={{ y: [0, 14, 0], rotate: [2, -1, 2] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[22%] left-[5%] w-48 rounded-xl border p-3 hidden lg:block"
+          style={{ background: "rgba(20,20,20,0.7)", borderColor: "rgba(16,185,129,0.2)", backdropFilter: "blur(12px)" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#10B981" }} />
+            <span className="text-[10px] font-mono" style={{ color: "#7A7A7A" }}>Trend Agent</span>
+          </div>
+          <div className="text-xs font-bold text-white mb-1">Opportunity Detected</div>
+          <div className="text-[10px] leading-relaxed" style={{ color: "#10B981" }}>AI SaaS valuations +220% YoY — window closing in 14 months</div>
+        </motion.div>
+
+        {/* Bottom-right floating card */}
+        <motion.div
+          animate={{ y: [0, -10, 0], rotate: [-1.5, 1, -1.5] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute bottom-[20%] right-[4%] w-44 rounded-xl border p-3 hidden lg:block"
+          style={{ background: "rgba(20,20,20,0.7)", borderColor: "rgba(245,158,11,0.2)", backdropFilter: "blur(12px)" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#F59E0B" }} />
+            <span className="text-[10px] font-mono" style={{ color: "#7A7A7A" }}>Finance Agent</span>
+          </div>
+          <div className="text-xs font-bold text-white mb-0.5">Wealth Projection</div>
+          <div className="text-lg font-black" style={{ color: "#F59E0B", fontFamily: "'Syne', sans-serif" }}>$2.4M</div>
+          <div className="text-[10px]" style={{ color: "#7A7A7A" }}>5-year trajectory</div>
+        </motion.div>
+      </div>
+
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

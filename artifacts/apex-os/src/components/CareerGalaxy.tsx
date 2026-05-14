@@ -88,14 +88,14 @@ export default function CareerGalaxy() {
             className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
             style={{ color: "#E50914", borderColor: "rgba(229,9,20,0.3)", background: "rgba(229,9,20,0.08)" }}
           >
-            Career Galaxy
+            Human Potential Matrix · Interactive
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            Navigate Your<br />
-            <span style={{ color: "#E50914" }}>Career Universe</span>
+            Navigate the<br />
+            <span style={{ color: "#E50914" }}>Career Cosmos</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#B3B3B3" }}>
-            Every career is a planet. Every skill is a constellation. Explore the cosmos of your potential.
+            Every career is a planet. Every skill a constellation. Your opportunities — mapped across the universe.
           </p>
         </motion.div>
 

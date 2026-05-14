@@ -30,11 +30,11 @@ export default function StudyCommandCenter() {
             className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
             style={{ color: "#10B981", borderColor: "rgba(16,185,129,0.3)", background: "rgba(16,185,129,0.08)" }}
           >
-            Study Command Center
+            Adaptive Intelligence Architecture · Learning Mode
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            Your AI Study<br />
-            <span style={{ color: "#10B981" }}>Intelligence</span>
+            Knowledge Becomes<br />
+            <span style={{ color: "#10B981" }}>Inevitable</span>
           </h2>
         </motion.div>
 

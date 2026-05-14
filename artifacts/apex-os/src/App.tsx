@@ -4,9 +4,12 @@ import Lenis from "lenis";
 import CinematicIntro from "@/components/CinematicIntro";
 import CursorGlow from "@/components/CursorGlow";
 import Navigation from "@/components/Navigation";
+import CinematicPrologue from "@/components/CinematicPrologue";
 import HeroSection from "@/components/HeroSection";
 import AgentEcosystem from "@/components/AgentEcosystem";
+import AgentDebate from "@/components/AgentDebate";
 import AIThinkingSpace from "@/components/AIThinkingSpace";
+import NeuralUniverse from "@/components/NeuralUniverse";
 import CareerGalaxy from "@/components/CareerGalaxy";
 import CareerCards from "@/components/CareerCards";
 import StudyCommandCenter from "@/components/StudyCommandCenter";
@@ -38,9 +41,12 @@ function ApexOS() {
       {introComplete && (
         <div style={{ background: "#0B0B0F" }}>
           <Navigation />
+          <CinematicPrologue />
           <HeroSection />
           <AgentEcosystem />
+          <AgentDebate />
           <AIThinkingSpace />
+          <NeuralUniverse />
           <CareerGalaxy />
           <CareerCards />
           <StudyCommandCenter />

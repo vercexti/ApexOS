@@ -31,14 +31,14 @@ export default function WorkflowUniverse() {
             className="inline-block text-xs font-semibold tracking-[0.3em] uppercase px-3 py-1.5 rounded-full mb-5 border"
             style={{ color: "#A78BFA", borderColor: "rgba(167,139,250,0.3)", background: "rgba(167,139,250,0.08)" }}
           >
-            Workflow Universe
+            Quantum Workflow System · 4 Active
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "'Syne', sans-serif" }}>
-            Autonomous Workflows<br />
-            <span style={{ color: "#A78BFA" }}>That Never Sleep</span>
+            Automation That<br />
+            <span style={{ color: "#A78BFA" }}>Thinks For Itself</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#B3B3B3" }}>
-            Set them once. They optimize, iterate, and improve — without your attention.
+            Deploy once. Watch it evolve, self-optimize, and compound your outcomes — infinitely.
           </p>
         </motion.div>
 
