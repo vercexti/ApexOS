@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 
 const navLinks = [
   { label: "Agents", href: "#agents" },
+  { label: "Dashboard", href: "#dashboard" },
+  { label: "Terminal", href: "#terminal" },
   { label: "Career", href: "#career" },
   { label: "Study", href: "#study" },
   { label: "Workflows", href: "#workflows" },

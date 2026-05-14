@@ -14,6 +14,8 @@ import ApexHUD from "@/components/ApexHUD";
 import AgentEcosystem from "@/components/AgentEcosystem";
 import AgentDebate from "@/components/AgentDebate";
 import AIThinkingSpace from "@/components/AIThinkingSpace";
+import AITerminal from "@/components/AITerminal";
+import StrategicDashboard from "@/components/StrategicDashboard";
 import NeuralUniverse from "@/components/NeuralUniverse";
 import CareerGalaxy from "@/components/CareerGalaxy";
 import CareerCards from "@/components/CareerCards";
@@ -117,6 +119,8 @@ function ApexOS() {
           <AgentEcosystem />
           <AgentDebate />
           <AIThinkingSpace />
+          <StrategicDashboard />
+          <AITerminal />
           <NeuralUniverse />
           <CareerGalaxy />
           <CareerCards />
