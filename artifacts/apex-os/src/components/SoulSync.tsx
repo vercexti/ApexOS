@@ -55,8 +55,12 @@ const particles = Array.from({ length: 30 }, (_, i) => ({
   y: 20 + Math.random() * 60,
 }));
 
-export default function SoulSync() {
-  const [activeTab, setActiveTab] = useState<Tab>("Companion");
+interface Props {
+  defaultTab?: Tab;
+}
+
+export default function SoulSync({ defaultTab = "Companion" }: Props) {
+  const [activeTab, setActiveTab] = useState<Tab>(defaultTab);
   const [entered, setEntered] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 

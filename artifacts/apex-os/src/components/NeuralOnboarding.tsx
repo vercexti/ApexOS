@@ -398,7 +398,7 @@ export default function NeuralOnboarding({ onClose }: Props) {
 
       {/* Skip */}
       <button
-        onClick={onClose}
+        onClick={() => onClose()}
         className="absolute bottom-6 right-6 text-xs tracking-widest uppercase opacity-30 hover:opacity-70 transition-opacity"
         style={{ color: "#B3B3B3" }}
         data-testid="button-skip-onboarding"

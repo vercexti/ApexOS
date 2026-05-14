@@ -203,6 +203,7 @@ export default function AITerminal() {
       return () => clearTimeout(t);
     } else {
       setBooted(true);
+      return undefined;
     }
   }, [bootLine]);
 
