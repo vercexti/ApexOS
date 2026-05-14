@@ -13,6 +13,7 @@ import AppFooter from "@/components/AppFooter";
 import AuthPage from "@/components/AuthPage";
 import MainHub, { type SectionId } from "@/components/MainHub";
 import HubNav from "@/components/HubNav";
+import HubHeader from "@/components/HubHeader";
 import ProfilePage from "@/components/ProfilePage";
 import SubscriptionPage from "@/components/SubscriptionPage";
 import FocusSprintPage from "@/components/FocusSprintPage";
@@ -83,52 +84,6 @@ function SectionContent({
   }
 }
 
-function HubTopBar({ user, onSection }: { user: User; onSection: (s: SectionId) => void }) {
-  return (
-    <div
-      className="fixed top-0 left-0 right-0 z-[200] px-5 py-3 flex items-center justify-between border-b"
-      style={{ background: "rgba(11,11,15,0.92)", borderColor: "#2A2A2E", backdropFilter: "blur(20px)" }}
-    >
-      <div className="flex items-center gap-2">
-        <div className="relative">
-          <div className="w-6 h-6 rounded-sm flex items-center justify-center" style={{ background: "#E50914" }}>
-            <span className="text-white font-black text-xs" style={{ fontFamily: "'Syne', sans-serif" }}>A</span>
-          </div>
-          <div className="absolute inset-0 blur-md opacity-60" style={{ background: "#E50914" }} />
-        </div>
-        <span className="text-white font-black tracking-widest text-sm" style={{ fontFamily: "'Syne', sans-serif" }}>
-          APEX<span style={{ color: "#E50914" }}>OS</span>
-        </span>
-      </div>
-
-      <div className="hidden md:flex items-center gap-2 text-xs font-mono" style={{ color: "#7A7A7A" }}>
-        <motion.span animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-1.5 h-1.5 rounded-full inline-block mr-1" style={{ background: "#10B981" }} />
-        COMMAND CENTER · {new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-      </div>
-
-      <div className="flex items-center gap-3">
-        <button
-          onClick={() => onSection("subscription")}
-          className="hidden md:flex items-center gap-1.5 text-[10px] px-2.5 py-1 rounded-full border font-semibold transition-all hover:opacity-80"
-          style={{ color: user.plan === "free" ? "#F59E0B" : "#10B981", borderColor: (user.plan === "free" ? "#F59E0B" : "#10B981") + "30", background: (user.plan === "free" ? "#F59E0B" : "#10B981") + "10" }}
-        >
-          {user.plan.toUpperCase()}
-          {user.plan === "free" && " · Upgrade"}
-        </button>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => onSection("profile")}
-          className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white"
-          style={{ background: "linear-gradient(135deg, #E50914, #5865F2)" }}
-        >
-          {(user.name[0] ?? "U").toUpperCase()}
-        </motion.button>
-      </div>
-    </div>
-  );
-}
-
 function ApexOS() {
   const [user, setUser] = useState<User | null>(null);
   const [introComplete, setIntroComplete] = useState(isDebug);
@@ -193,6 +148,7 @@ function ApexOS() {
           user={user}
           onProfile={() => handleSection("profile")}
           onSubscription={() => handleSection("subscription")}
+          onSection={handleSection}
         />
 
         <AnimatePresence>
@@ -251,7 +207,7 @@ function ApexOS() {
         style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 3px)", backgroundSize: "100% 4px" }}
       />
 
-      <HubTopBar user={user} onSection={handleSection} />
+      <HubHeader user={user} onSection={handleSection} />
 
       <motion.div
         initial={{ opacity: 0 }}
