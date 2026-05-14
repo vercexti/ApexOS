@@ -7,6 +7,8 @@ import CinematicIntro from "@/components/CinematicIntro";
 import CursorGlow from "@/components/CursorGlow";
 import NeuralOnboarding from "@/components/NeuralOnboarding";
 import ApexHUD from "@/components/ApexHUD";
+import { ToastProvider } from "@/components/ToastProvider";
+import AppFooter from "@/components/AppFooter";
 
 import AuthPage from "@/components/AuthPage";
 import MainHub, { type SectionId } from "@/components/MainHub";
@@ -258,6 +260,7 @@ function ApexOS() {
         style={{ background: "#0B0B0F", minHeight: "100vh" }}
       >
         <MainHub onSection={handleSection} user={user} />
+        <AppFooter onSection={(s) => handleSection(s as SectionId)} />
       </motion.div>
 
       <ApexHUD onboardingComplete={onboardingComplete} onboardingProfile={onboardingProfile} />
@@ -268,7 +271,9 @@ function ApexOS() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ApexOS />
+      <ToastProvider>
+        <ApexOS />
+      </ToastProvider>
     </QueryClientProvider>
   );
 }

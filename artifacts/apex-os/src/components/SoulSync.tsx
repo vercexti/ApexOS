@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SoulSyncCompanion from "@/components/SoulSyncCompanion";
 import SoulSyncRecovery from "@/components/SoulSyncRecovery";
 import SoulSyncPsychologists from "@/components/SoulSyncPsychologists";
-import SoulSyncAmbient from "@/components/SoulSyncAmbient";
+import SoulSyncOnboardingQuiz, { type EmotionalProfile } from "@/components/SoulSyncOnboardingQuiz";
 
 const tabs = ["Companion", "Recovery", "Psychologists"] as const;
 type Tab = typeof tabs[number];
@@ -63,10 +63,25 @@ export default function SoulSync({ defaultTab = "Companion" }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>(defaultTab);
   const [entered, setEntered] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [quizDone, setQuizDone] = useState(() => !!localStorage.getItem("soulSyncOnboardingComplete"));
+  const [emotionalProfile, setEmotionalProfile] = useState<EmotionalProfile | null>(() => {
+    const saved = localStorage.getItem("soulSyncProfile");
+    return saved ? (JSON.parse(saved) as EmotionalProfile) : null;
+  });
+
+  const handleQuizComplete = (profile: EmotionalProfile) => {
+    localStorage.setItem("soulSyncOnboardingComplete", "1");
+    localStorage.setItem("soulSyncProfile", JSON.stringify(profile));
+    setEmotionalProfile(profile);
+    setQuizDone(true);
+  };
+
+  if (!quizDone) {
+    return <SoulSyncOnboardingQuiz onComplete={handleQuizComplete} />;
+  }
 
   return (
     <>
-      <SoulSyncAmbient />
 
       <section
         id="soulsync"
