@@ -5,10 +5,10 @@ const footerLinks = {
   Product: [
     { label: "AI Agent Network", section: "agents" },
     { label: "SoulSync", section: "soulsync" },
-    { label: "Career Galaxy", section: "career-galaxy" },
     { label: "Study Command Center", section: "study" },
     { label: "Workflow Universe", section: "workflows" },
     { label: "AI Terminal", section: "terminal" },
+    { label: "Focus Sprint", section: "focus-sprint" },
   ],
   Wellness: [
     { label: "Sage Companion", section: "soulsync" },

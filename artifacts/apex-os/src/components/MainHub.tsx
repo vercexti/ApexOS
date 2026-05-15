@@ -26,7 +26,7 @@ const sections: HubSection[] = [
   { id: "terminal",          category: "Intelligence",  name: "AI Terminal",            desc: "Neural command interface — analyze, simulate, deploy",           color: "#10B981", icon: "◎"            },
   { id: "neural-arch",       category: "Intelligence",  name: "Neural Architecture",    desc: "Cognitive system visualization — live thought map",              color: "#5865F2", icon: "◇"            },
   { id: "research",          category: "Intelligence",  name: "Research Intelligence",  desc: "Deep scan 10,000+ sources — A+ grade reports",                  color: "#E50914", icon: "◈", pro: true  },
-  { id: "career-galaxy",     category: "Career",        name: "Career Galaxy",          desc: "Cosmic career path map — interactive node system",               color: "#10B981", icon: "◎"            },
+  { id: "career-galaxy",     category: "Career",        name: "Celestial Map",          desc: "Stellar career atlas — interactive node system",                 color: "#10B981", icon: "◎"            },
   { id: "career-cards",      category: "Career",        name: "Opportunity Cards",      desc: "Netflix-style career browser — fullscreen modal",                color: "#10B981", icon: "◉"            },
   { id: "future-self",       category: "Career",        name: "Future Self Simulator",  desc: "1 / 3 / 5 year projection engine",                               color: "#F59E0B", icon: "◆"            },
   { id: "network-engine",    category: "Career",        name: "Network Engine",         desc: "High-value connection finder — 34% reply rate",                 color: "#EC4899", icon: "◇", pro: true  },
@@ -103,10 +103,10 @@ function NeuralScoreRing({ score = 78 }: { score?: number }) {
             <stop offset="100%" stopColor="#FF6B6B" />
           </linearGradient>
         </defs>
-        <text x="48" y="44" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="20" fontWeight="900" fontFamily="Syne, sans-serif">{score}</text>
-        <text x="48" y="59" textAnchor="middle" dominantBaseline="middle" fill="#7A7A7A" fontSize="7" letterSpacing="2">NEURAL</text>
+        <text x="48" y="44" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="22" fontWeight="900" fontFamily="Syne, sans-serif">{score}</text>
+        <text x="48" y="59" textAnchor="middle" dominantBaseline="middle" fill="#7A7A7A" fontSize="9" letterSpacing="2">NEURAL</text>
       </svg>
-      <div className="text-[9px] font-mono tracking-widest" style={{ color: "#7A7A7A" }}>SCORE</div>
+      <div className="text-xs font-mono tracking-widest" style={{ color: "#7A7A7A" }}>SCORE</div>
     </div>
   );
 }
@@ -129,12 +129,12 @@ function DailyBriefing() {
       <div className="flex items-center gap-2 mb-3">
         <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
           className="w-1.5 h-1.5 rounded-full" style={{ background: "#10B981" }} />
-        <span className="text-[10px] font-mono tracking-widest" style={{ color: "#10B981" }}>DAILY INTELLIGENCE BRIEF</span>
+        <span className="text-xs font-mono tracking-widest" style={{ color: "#10B981" }}>DAILY INTELLIGENCE BRIEF</span>
       </div>
       <AnimatePresence mode="wait">
         <motion.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.4, ease: "easeOut" }}>
-          <div className="text-[9px] font-bold tracking-widest uppercase mb-1.5 px-2 py-0.5 rounded-full inline-block"
+          <div className="text-[11px] font-bold tracking-widest uppercase mb-1.5 px-2 py-0.5 rounded-full inline-block"
             style={{ color: item.accent, background: item.accent + "15" }}>{item.label}</div>
           <p className="text-sm leading-relaxed text-white">{item.text}</p>
         </motion.div>
@@ -191,7 +191,7 @@ function ActivityTicker() {
         className="flex items-center gap-0 whitespace-nowrap px-4"
         style={{ width: "max-content" }}
       >
-        <span className="text-[10px] font-mono" style={{ color: "#5A5A6A" }}>{doubled}</span>
+        <span className="text-xs font-mono" style={{ color: "#5A5A6A" }}>{doubled}</span>
       </motion.div>
     </div>
   );
@@ -222,7 +222,7 @@ function SoulSyncViz() {
       <AnimatePresence mode="wait">
         <motion.div key={mood} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }}
           transition={{ duration: 0.5 }}
-          className="mt-2.5 text-[10px] font-bold tracking-widest uppercase" style={{ color: "#A78BFA" }}>
+          className="mt-2.5 text-xs font-bold tracking-widest uppercase" style={{ color: "#A78BFA" }}>
           {moodLabels[mood]} Mode
         </motion.div>
       </AnimatePresence>
@@ -280,12 +280,12 @@ function AgentViz() {
         <motion.circle cx={cx} cy={cy} r={13} fill="none" stroke="#E50914" strokeWidth="1.5" strokeOpacity="0.4"
           animate={{ r: [13, 17, 13] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} />
         <circle cx={cx} cy={cy} r={9} fill="#E50914" fillOpacity="0.14" />
-        <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" fill="#E50914" fontSize="9" fontWeight="900">AI</text>
+        <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" fill="#E50914" fontSize="12" fontWeight="900">AI</text>
       </svg>
       <div className="absolute bottom-3 left-0 right-0 flex justify-center">
         <AnimatePresence mode="wait">
           <motion.span key={label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }} className="text-[9px] font-mono" style={{ color: "#E50914" }}>
+            transition={{ duration: 0.35 }} className="text-xs font-mono" style={{ color: "#E50914" }}>
             {label} activated
           </motion.span>
         </AnimatePresence>
@@ -322,7 +322,7 @@ function WorkflowViz() {
                 borderColor: i <= step ? "#A78BFA40" : "#1E1E2A",
               }}
               transition={{ duration: 0.4 }}
-              className="flex-1 text-center rounded py-1.5 text-[8px] font-bold border min-w-0 truncate px-1"
+              className="flex-1 text-center rounded py-1.5 text-[10px] font-bold border min-w-0 truncate px-1"
               style={{ boxShadow: i === step ? "0 0 10px rgba(167,139,250,0.25)" : "none" }}
             >
               {node}
@@ -337,7 +337,7 @@ function WorkflowViz() {
       </div>
       <AnimatePresence mode="wait">
         <motion.div key={wfIdx} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }} className="text-[10px] font-mono" style={{ color: "#A78BFA" }}>
+          transition={{ duration: 0.4 }} className="text-xs font-mono" style={{ color: "#A78BFA" }}>
           Running: {WF_NAMES[wfIdx]}
         </motion.div>
       </AnimatePresence>
@@ -346,11 +346,75 @@ function WorkflowViz() {
           <motion.div key={wf}
             animate={{ opacity: i === wfIdx ? 1 : 0.28 }}
             transition={{ duration: 0.5 }}
-            className="text-[8px] font-mono px-1.5 py-0.5 rounded"
+            className="text-[10px] font-mono px-1.5 py-0.5 rounded"
             style={{ color: "#A78BFA", background: "#A78BFA0F", border: "1px solid #A78BFA20" }}>
             {wf}
           </motion.div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Celestial Map Viz ─────────────────────────────────────────────────────
+const CAREER_NODES = [
+  { label: "AI Eng", x: 50, y: 22, score: 96 },
+  { label: "Founder", x: 78, y: 38, score: 79 },
+  { label: "Data Sci", x: 22, y: 50, score: 91 },
+  { label: "Designer", x: 50, y: 66, score: 88 },
+  { label: "Full Stack", x: 76, y: 62, score: 87 },
+];
+function CelestialViz() {
+  const [pulse, setPulse] = useState(0);
+  const [activeNode, setActiveNode] = useState(0);
+  useEffect(() => {
+    const t1 = setInterval(() => setPulse(p => (p + 1) % 60), 50);
+    const t2 = setInterval(() => setActiveNode(n => (n + 1) % CAREER_NODES.length), 1600);
+    return () => { clearInterval(t1); clearInterval(t2); };
+  }, []);
+  const stars = Array.from({ length: 28 }, (_, i) => ({
+    x: ((i * 47 + 13) % 100),
+    y: ((i * 31 + 7) % 100),
+    r: 0.6 + (i % 3) * 0.4,
+    phase: i * 0.4,
+  }));
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+      <svg width="140" height="140" viewBox="0 0 140 140" overflow="visible">
+        {stars.map((s, i) => (
+          <circle key={i} cx={s.x * 1.4} cy={s.y * 1.4} r={s.r}
+            fill="white" fillOpacity={0.15 + Math.abs(Math.sin(pulse * 0.08 + s.phase)) * 0.4} />
+        ))}
+        <circle cx="70" cy="70" r="38" fill="none" stroke="#10B981" strokeWidth="0.5" strokeOpacity="0.2" />
+        <circle cx="70" cy="70" r="55" fill="none" stroke="#10B981" strokeWidth="0.3" strokeOpacity="0.1" />
+        {CAREER_NODES.map((node, i) => {
+          const x = node.x * 1.4;
+          const y = node.y * 1.4;
+          const isActive = i === activeNode;
+          return (
+            <g key={node.label}>
+              <line x1="70" y1="70" x2={x} y2={y} stroke="#10B981" strokeWidth="0.6" strokeOpacity={isActive ? 0.5 : 0.12} />
+              {isActive && (
+                <motion.circle cx={x} cy={y} r={10} fill="#10B981" fillOpacity={0.12}
+                  animate={{ r: [10, 15, 10] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} />
+              )}
+              <circle cx={x} cy={y} r={isActive ? 4.5 : 3}
+                fill={isActive ? "#10B981" : "#1E3A2E"} stroke="#10B981" strokeWidth={isActive ? 1.5 : 0.8} strokeOpacity="0.8" />
+            </g>
+          );
+        })}
+        <motion.circle cx="70" cy="70" r="10" fill="#10B981" fillOpacity="0.18"
+          animate={{ r: [10, 14, 10] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} />
+        <circle cx="70" cy="70" r="6" fill="#10B981" fillOpacity="0.35" />
+        <text x="70" y="70" textAnchor="middle" dominantBaseline="middle" fill="#10B981" fontSize="8" fontWeight="900">◎</text>
+      </svg>
+      <div className="absolute bottom-3 left-0 right-0 flex justify-center">
+        <AnimatePresence mode="wait">
+          <motion.span key={activeNode} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }} className="text-xs font-mono" style={{ color: "#10B981" }}>
+            {CAREER_NODES[activeNode]?.label} — match score {CAREER_NODES[activeNode]?.score}
+          </motion.span>
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -393,6 +457,18 @@ const featuredDefs = [
     subtitle: "6 autonomous pipelines execute silently. Daily Focus, Finance Scan, Sleep Guard — running without you.",
     tags: ["6 Workflows", "Auto-Trigger", "Live Execution", "Zero Effort"],
     Viz: WorkflowViz,
+  },
+  {
+    id: "career-galaxy" as SectionId,
+    color: "#10B981",
+    bg: "linear-gradient(160deg, #051510 0%, #060D0A 100%)",
+    border: "rgba(16,185,129,0.22)",
+    glow: "rgba(16,185,129,0.10)",
+    label: "Career Core",
+    title: "Celestial Map",
+    subtitle: "Your stellar career atlas. Navigate paths, match opportunities, and chart your trajectory across the cosmos.",
+    tags: ["10 Career Nodes", "Salary Data", "Match Score", "Live Paths"],
+    Viz: CelestialViz,
   },
 ];
 
@@ -456,7 +532,7 @@ export default function MainHub({ onSection, user }: Props) {
                   <span className="text-[10px] font-mono" style={{ color: "#5A5A6A" }}>APEX OS v2.0</span>
                 </div>
 
-                <div className="text-[11px] font-mono tracking-widest uppercase mb-2" style={{ color: "#5A5A6A" }}>
+                <div className="text-xs font-mono tracking-widest uppercase mb-2" style={{ color: "#5A5A6A" }}>
                   {greeting}
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight mb-4"
@@ -480,7 +556,7 @@ export default function MainHub({ onSection, user }: Props) {
                       className="flex items-center gap-2 px-4 py-2 rounded-full border"
                       style={{ background: color + "0C", borderColor: color + "28" }}>
                       <span className="font-black text-sm" style={{ color, fontFamily: "'Syne', sans-serif" }}>{v}</span>
-                      <span className="text-[10px]" style={{ color: "#5A5A6A" }}>{label}</span>
+                      <span className="text-xs" style={{ color: "#5A5A6A" }}>{label}</span>
                     </motion.div>
                   ))}
                   {user.plan === "free" && (
@@ -516,7 +592,7 @@ export default function MainHub({ onSection, user }: Props) {
 
           {/* Quick actions */}
           <div className="rounded-xl border p-4" style={{ background: "#0C0C12", borderColor: "#1E1E24" }}>
-            <div className="text-[10px] font-mono tracking-widest mb-3" style={{ color: "#5A5A6A" }}>QUICK ACTIONS</div>
+            <div className="text-xs font-mono tracking-widest mb-3" style={{ color: "#5A5A6A" }}>QUICK ACTIONS</div>
             <div className="grid grid-cols-3 gap-2">
               {quickActions.map((qa) => (
                 <motion.button key={qa.id}
@@ -525,8 +601,8 @@ export default function MainHub({ onSection, user }: Props) {
                   onClick={() => onSection(qa.id)}
                   className="flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl border text-center transition-all"
                   style={{ background: qa.color + "0C", borderColor: qa.color + "22" }}>
-                  <span className="text-base" style={{ color: qa.color }}>{qa.icon}</span>
-                  <span className="text-[9px] font-bold leading-tight" style={{ color: qa.color }}>{qa.label}</span>
+                  <span className="text-lg" style={{ color: qa.color }}>{qa.icon}</span>
+                  <span className="text-xs font-bold leading-tight" style={{ color: qa.color }}>{qa.label}</span>
                 </motion.button>
               ))}
             </div>
@@ -541,12 +617,12 @@ export default function MainHub({ onSection, user }: Props) {
         {/* ─── FEATURED CARDS ────────────────────────────────── */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-5">
-            <div className="text-[10px] font-bold tracking-[0.22em] uppercase" style={{ color: "#5A5A6A" }}>Core Modules</div>
+            <div className="text-xs font-bold tracking-[0.22em] uppercase" style={{ color: "#5A5A6A" }}>Core Modules</div>
             <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #2A2A2E, transparent)" }} />
-            <div className="text-[9px] font-mono" style={{ color: "#3A3A4A" }}>Live</div>
+            <div className="text-xs font-mono" style={{ color: "#3A3A4A" }}>Live</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
             {featuredDefs.map(({ id, color, bg, border, glow, label, title, subtitle, tags, Viz }, idx) => (
               <motion.div key={id}
                 initial={{ opacity: 0, y: 20 }}
@@ -573,12 +649,12 @@ export default function MainHub({ onSection, user }: Props) {
 
                 {/* Card body */}
                 <div className="relative px-5 pb-5 flex flex-col flex-1">
-                  <div className="text-[9px] font-bold tracking-widest uppercase mb-1" style={{ color: color + "BB" }}>{label}</div>
-                  <div className="font-black text-[15px] text-white mb-2 leading-snug" style={{ fontFamily: "'Syne', sans-serif" }}>{title}</div>
-                  <div className="text-[11px] leading-relaxed mb-3 flex-1" style={{ color: "#8A8A9A" }}>{subtitle}</div>
+                  <div className="text-[11px] font-bold tracking-widest uppercase mb-1" style={{ color: color + "BB" }}>{label}</div>
+                  <div className="font-black text-[17px] text-white mb-2 leading-snug" style={{ fontFamily: "'Syne', sans-serif" }}>{title}</div>
+                  <div className="text-xs leading-relaxed mb-3 flex-1" style={{ color: "#8A8A9A" }}>{subtitle}</div>
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {tags.map(t => (
-                      <span key={t} className="text-[9px] font-semibold px-2 py-0.5 rounded-full"
+                      <span key={t} className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                         style={{ background: color + "14", color, border: `1px solid ${color}28` }}>{t}</span>
                     ))}
                   </div>
@@ -586,10 +662,10 @@ export default function MainHub({ onSection, user }: Props) {
                     <div className="flex items-center gap-1.5">
                       <motion.span animate={{ opacity: [1, 0.25, 1] }} transition={{ duration: 1.5, repeat: Infinity }}
                         className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#10B981" }} />
-                      <span className="text-[9px] font-mono" style={{ color: "#10B981" }}>Live</span>
+                      <span className="text-xs font-mono" style={{ color: "#10B981" }}>Live</span>
                     </div>
                     <motion.div animate={{ x: hoveredCard === id ? 4 : 0 }} transition={{ duration: 0.2 }}
-                      className="flex items-center gap-1 text-xs font-bold" style={{ color }}>
+                      className="flex items-center gap-1 text-sm font-bold" style={{ color }}>
                       Enter
                       <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
                         <path d="M2.5 6H9.5M6.5 3L9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -605,7 +681,7 @@ export default function MainHub({ onSection, user }: Props) {
         {/* ─── SEARCH + FILTERS ──────────────────────────────── */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <div className="flex items-center gap-3 mb-4">
-            <div className="text-[10px] font-bold tracking-[0.22em] uppercase" style={{ color: "#5A5A6A" }}>All Modules</div>
+            <div className="text-xs font-bold tracking-[0.22em] uppercase" style={{ color: "#5A5A6A" }}>All Modules</div>
             <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #2A2A2E, transparent)" }} />
           </div>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
@@ -628,7 +704,7 @@ export default function MainHub({ onSection, user }: Props) {
                 return (
                   <motion.button key={cat} whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
                     onClick={() => setActiveCategory(cat)}
-                    className="px-3.5 py-1.5 rounded-full text-[11px] font-bold border transition-all duration-200"
+                    className="px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all duration-200"
                     style={{
                       background: isActive ? col + "1E" : "transparent",
                       borderColor: isActive ? col + "55" : "#1E1E28",
@@ -658,7 +734,7 @@ export default function MainHub({ onSection, user }: Props) {
                       <div className="w-1.5 h-4 rounded-full" style={{ background: catColor }} />
                       <span className="text-xs font-bold tracking-widest uppercase" style={{ color: catColor }}>{cat}</span>
                       <div className="flex-1 h-px" style={{ background: catColor + "20" }} />
-                      <span className="text-[9px] font-mono" style={{ color: "#3A3A4A" }}>{catSections.length} modules</span>
+                      <span className="text-xs font-mono" style={{ color: "#3A3A4A" }}>{catSections.length} modules</span>
                     </motion.div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                       {catSections.map((section, i) => (
@@ -713,7 +789,7 @@ function SectionCard({ section, user, idx, hovered, onHover, onSection }: CardPr
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: idx * 0.018, ease: "easeOut" }}
+      transition={{ duration: 0.35, delay: Math.min(idx * 0.015, 0.28), ease: "easeOut" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
       onClick={() => locked ? onSection("subscription") : onSection(section.id)}
@@ -725,7 +801,7 @@ function SectionCard({ section, user, idx, hovered, onHover, onSection }: CardPr
         borderColor: hovered ? section.color + "35" : "#1E1E28",
         boxShadow: hovered ? `0 8px 32px ${section.color}14` : "none",
         transition: "border-color 0.2s, box-shadow 0.2s",
-        minHeight: 170,
+        minHeight: 185,
       }}
     >
       {/* Top color stripe */}
@@ -738,11 +814,11 @@ function SectionCard({ section, user, idx, hovered, onHover, onSection }: CardPr
       <div className="p-4 flex flex-col flex-1">
         {/* Top row */}
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
+          <span className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
             style={{ color: catColor, background: catColor + "10" }}>{section.category}</span>
           <div className="flex gap-1 items-center">
-            {section.hot && <span className="text-[8px] font-bold px-1.5 py-0.5 rounded" style={{ color: "#F59E0B", background: "#F59E0B12" }}>HOT</span>}
-            {locked       && <span className="text-[8px] font-bold px-1.5 py-0.5 rounded" style={{ color: "#5A5A6A", background: "#1A1A22" }}>PRO</span>}
+            {section.hot && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: "#F59E0B", background: "#F59E0B12" }}>HOT</span>}
+            {locked       && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: "#5A5A6A", background: "#1A1A22" }}>PRO</span>}
           </div>
         </div>
 
@@ -758,19 +834,19 @@ function SectionCard({ section, user, idx, hovered, onHover, onSection }: CardPr
         </div>
 
         {/* Desc */}
-        <div className="text-[11px] leading-relaxed flex-1" style={{ color: "#5A5A6A" }}>{section.desc}</div>
+        <div className="text-xs leading-relaxed flex-1" style={{ color: "#5A5A6A" }}>{section.desc}</div>
 
         {/* Bottom */}
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full"
               style={{ background: locked ? "#2A2A2E" : "#10B981" }} />
-            <span className="text-[9px]" style={{ color: locked ? "#5A5A6A" : "#10B981" }}>
+            <span className="text-xs" style={{ color: locked ? "#5A5A6A" : "#10B981" }}>
               {locked ? "Pro Required" : "Live"}
             </span>
           </div>
           <motion.div animate={{ x: hovered ? 3 : 0, opacity: hovered ? 1 : 0 }} transition={{ duration: 0.18 }}
-            className="flex items-center gap-1 text-[10px] font-bold" style={{ color: section.color }}>
+            className="flex items-center gap-1 text-xs font-bold" style={{ color: section.color }}>
             {locked ? "Upgrade" : "Open"}
             <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
               <path d="M2 5H8M5.5 2.5L8 5L5.5 7.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />

@@ -44,7 +44,7 @@ const navCategories: NavCategory[] = [
     label: "Career",
     color: "#10B981",
     sections: [
-      { id: "career-galaxy",  name: "Career Galaxy",          desc: "Cosmic career path map",          icon: "◎" },
+      { id: "career-galaxy",  name: "Celestial Map",           desc: "Interactive stellar career atlas", icon: "◎", hot: true },
       { id: "career-cards",   name: "Opportunity Cards",       desc: "Netflix-style career browser",    icon: "◉" },
       { id: "future-self",    name: "Future Self Simulator",   desc: "1 / 3 / 5 year projection",      icon: "◆" },
       { id: "network-engine", name: "Network Engine",          desc: "High-value connection finder",    icon: "◇" },
