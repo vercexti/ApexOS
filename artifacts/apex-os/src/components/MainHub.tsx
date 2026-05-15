@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export type SectionId =
@@ -9,668 +9,522 @@ export type SectionId =
   | "workflows" | "decision-sim" | "finance" | "automation-builder"
   | "profile" | "subscription" | "onboarding";
 
-interface HubSection {
-  id: SectionId; category: string; name: string; desc: string;
-  color: string; icon: string; hot?: boolean; pro?: boolean;
-}
-
-const sections: HubSection[] = [
-  { id: "soulsync",          category: "Wellness",      name: "SoulSync Companion",    desc: "Emotionally intelligent AI — Sage adapts to your needs",         color: "#8B5CF6", icon: "◈", hot: true  },
-  { id: "recovery",          category: "Wellness",      name: "Daily Recovery",         desc: "Quests, mood tracking, XP streaks",                              color: "#5865F2", icon: "◉"            },
-  { id: "psychologists",     category: "Wellness",      name: "Psychologist Connect",   desc: "Verified professionals from $12 / session",                      color: "#EC4899", icon: "◎"            },
-  { id: "breathing",         category: "Wellness",      name: "Breathing & Grounding",  desc: "4-4-6 protocol — Anxiety reduction exercises",                  color: "#7C3AED", icon: "◇"            },
-  { id: "ambient",           category: "Wellness",      name: "Ambient Soundscapes",    desc: "Focus, calm, sleep audio streams",                               color: "#6D28D9", icon: "◆"            },
-  { id: "agents",            category: "Intelligence",  name: "AI Agent Network",       desc: "11 autonomous intelligences — click to activate",                color: "#E50914", icon: "◈", hot: true  },
-  { id: "debate",            category: "Intelligence",  name: "Neural Debate Arena",    desc: "Agents debate your decisions in real time",                      color: "#E50914", icon: "◉"            },
-  { id: "dashboard",         category: "Intelligence",  name: "Strategic Dashboard",    desc: "Live metrics, neural heatmap, agent stream",                     color: "#5865F2", icon: "◆"            },
-  { id: "terminal",          category: "Intelligence",  name: "AI Terminal",            desc: "Neural command interface — analyze, simulate, deploy",           color: "#10B981", icon: "◎"            },
-  { id: "neural-arch",       category: "Intelligence",  name: "Neural Architecture",    desc: "Cognitive system visualization — live thought map",              color: "#5865F2", icon: "◇"            },
-  { id: "research",          category: "Intelligence",  name: "Research Intelligence",  desc: "Deep scan 10,000+ sources — A+ grade reports",                  color: "#E50914", icon: "◈", pro: true  },
-  { id: "career-galaxy",     category: "Career",        name: "Career Galaxy",          desc: "Cosmic career path map — interactive node system",               color: "#10B981", icon: "◎"            },
-  { id: "career-cards",      category: "Career",        name: "Opportunity Cards",      desc: "Netflix-style career browser — fullscreen modal",                color: "#10B981", icon: "◉"            },
-  { id: "future-self",       category: "Career",        name: "Future Self Simulator",  desc: "1 / 3 / 5 year projection engine",                               color: "#F59E0B", icon: "◆"            },
-  { id: "network-engine",    category: "Career",        name: "Network Engine",         desc: "High-value connection finder — 34% reply rate",                 color: "#EC4899", icon: "◇", pro: true  },
-  { id: "study",             category: "Learning",      name: "Study Command Center",   desc: "Mission-control for accelerated learning",                       color: "#5865F2", icon: "◈"            },
-  { id: "universe",          category: "Learning",      name: "Neural Universe",        desc: "Knowledge cosmos — interactive concept clusters",                color: "#A78BFA", icon: "◉"            },
-  { id: "focus-sprint",      category: "Learning",      name: "Focus Sprint",           desc: "25-min deep work engine — ADHD-friendly",                       color: "#F59E0B", icon: "◎"            },
-  { id: "workflows",         category: "Automation",    name: "Workflow Universe",       desc: "6 autonomous workflow engines — execute live",                   color: "#A78BFA", icon: "◇", hot: true  },
-  { id: "decision-sim",      category: "Automation",    name: "Decision Simulator",     desc: "200-scenario Monte Carlo — stress-test choices",                 color: "#06B6D4", icon: "◆"            },
-  { id: "finance",           category: "Automation",    name: "Finance Projector",      desc: "Wealth trajectory — $1M+ path simulation",                      color: "#34D399", icon: "◈", pro: true  },
-  { id: "automation-builder",category: "Automation",    name: "Automation Builder",     desc: "Custom workflow architect — deploy instantly",                   color: "#F97316", icon: "◉"            },
-  { id: "profile",           category: "Personal",      name: "My Profile",             desc: "Account, achievements, neural score",                            color: "#7A7A7A", icon: "◎"            },
-  { id: "subscription",      category: "Personal",      name: "Subscription & Plans",   desc: "Free → Pro → Elite — unlock full OS",                           color: "#F59E0B", icon: "◆"            },
-  { id: "onboarding",        category: "Personal",      name: "Neural Onboarding",      desc: "Personalize your OS intelligence profile",                       color: "#8B5CF6", icon: "◇"            },
-];
-
-const categories = ["All", "Wellness", "Intelligence", "Career", "Learning", "Automation", "Personal"];
-const categoryColors: Record<string, string> = {
-  Wellness: "#8B5CF6", Intelligence: "#E50914", Career: "#10B981",
-  Learning: "#5865F2", Automation: "#A78BFA", Personal: "#7A7A7A",
-};
-
-// ── Hooks ──────────────────────────────────────────────────────────────────
-function useCounter(target: number, duration = 2000, delay = 0) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      let start = 0;
-      const step = target / (duration / 16);
-      const t = setInterval(() => {
-        start += step;
-        if (start >= target) { setVal(target); clearInterval(t); }
-        else setVal(Math.floor(start));
-      }, 16);
-      return () => clearInterval(t);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [target, duration, delay]);
-  return val;
-}
-
-function useTimeGreeting() {
-  const h = new Date().getHours();
-  if (h < 12) return "Good morning";
-  if (h < 17) return "Good afternoon";
-  if (h < 21) return "Good evening";
-  return "Good night";
-}
-
-// ── Neural Score Ring ──────────────────────────────────────────────────────
-function NeuralScoreRing({ score = 78 }: { score?: number }) {
-  const r = 38;
-  const circ = 2 * Math.PI * r;
-  const offset = circ * (1 - score / 100);
+// ── Shared: SoulSync Orb ───────────────────────────────────────────────────
+function SoulOrb({ size = 160, animate: doAnimate = true }: { size?: number; animate?: boolean }) {
+  const core = size * 0.38;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <svg width="96" height="96" viewBox="0 0 96 96">
-        <circle cx="48" cy="48" r={r} fill="none" stroke="#1E1E24" strokeWidth="7" />
-        <circle cx="48" cy="48" r={r} fill="none" stroke="#2A2A2E" strokeWidth="1" />
-        <motion.circle
-          cx="48" cy="48" r={r}
-          fill="none"
-          stroke="url(#ringGrad)"
-          strokeWidth="7"
-          strokeLinecap="round"
-          strokeDasharray={circ}
-          initial={{ strokeDashoffset: circ }}
-          animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
-          transform="rotate(-90 48 48)"
+    <div className="relative flex items-center justify-center shrink-0" style={{ width: size, height: size }}>
+      {[1, 0.68, 0.42].map((s, i) => (
+        <motion.div
+          key={i}
+          animate={doAnimate ? { scale: [s, s * 1.14, s], opacity: [0.07, 0.18, 0.07] } : {}}
+          transition={{ duration: 4.5, repeat: Infinity, delay: i * 0.55, ease: "easeInOut" }}
+          className="absolute rounded-full"
+          style={{ width: size, height: size, background: "radial-gradient(circle, #8B5CF6 0%, #5865F2 55%, transparent 80%)", filter: "blur(6px)" }}
         />
-        <defs>
-          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#E50914" />
-            <stop offset="100%" stopColor="#FF6B6B" />
-          </linearGradient>
-        </defs>
-        <text x="48" y="44" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="22" fontWeight="900" fontFamily="Syne, sans-serif">{score}</text>
-        <text x="48" y="59" textAnchor="middle" dominantBaseline="middle" fill="#7A7A7A" fontSize="9" letterSpacing="2">NEURAL</text>
-      </svg>
-      <div className="text-xs font-mono tracking-widest" style={{ color: "#7A7A7A" }}>SCORE</div>
-    </div>
-  );
-}
-
-// ── Daily Briefing ─────────────────────────────────────────────────────────
-const briefingItems = [
-  { label: "Focus", text: "Your peak cognitive window opens at 2 PM — Focus Sprint is recommended.", accent: "#F59E0B" },
-  { label: "Career", text: "3 new opportunities match your Career Galaxy nodes. Salary range: $130–$180k.", accent: "#10B981" },
-  { label: "Wellness", text: "Sage detected elevated stress patterns. Breathing & Grounding session queued.", accent: "#8B5CF6" },
-  { label: "Research", text: "Research Agent completed overnight scan — 14 papers flagged as high-relevance.", accent: "#E50914" },
-];
-
-function DailyBriefing() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => { const t = setInterval(() => setIdx(i => (i + 1) % briefingItems.length), 3500); return () => clearInterval(t); }, []);
-  const item = briefingItems[idx];
-  return (
-    <div className="rounded-xl border p-4 h-full flex flex-col justify-between"
-      style={{ background: "#0C0C12", borderColor: "#1E1E24" }}>
-      <div className="flex items-center gap-2 mb-3">
-        <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.4, repeat: Infinity }}
-          className="w-1.5 h-1.5 rounded-full" style={{ background: "#10B981" }} />
-        <span className="text-xs font-mono tracking-widest" style={{ color: "#10B981" }}>DAILY INTELLIGENCE BRIEF</span>
-      </div>
-      <AnimatePresence mode="wait">
-        <motion.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}>
-          <div className="text-[11px] font-bold tracking-widest uppercase mb-1.5 px-2 py-0.5 rounded-full inline-block"
-            style={{ color: item.accent, background: item.accent + "15" }}>{item.label}</div>
-          <p className="text-sm leading-relaxed text-white">{item.text}</p>
-        </motion.div>
-      </AnimatePresence>
-      <div className="flex gap-1.5 mt-3">
-        {briefingItems.map((_, i) => (
-          <button key={i} onClick={() => setIdx(i)}
-            className="h-0.5 rounded-full transition-all duration-300"
-            style={{ background: i === idx ? briefingItems[i].accent : "#2A2A2E", width: i === idx ? 20 : 8 }} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Quick Actions ──────────────────────────────────────────────────────────
-interface QuickAction { label: string; id: SectionId; color: string; icon: string }
-const quickActions: QuickAction[] = [
-  { label: "Focus Sprint",    id: "focus-sprint",   color: "#F59E0B", icon: "⏱" },
-  { label: "Run Agents",      id: "agents",         color: "#E50914", icon: "◈" },
-  { label: "Career Scan",     id: "career-galaxy",  color: "#10B981", icon: "◎" },
-  { label: "Daily Recovery",  id: "recovery",       color: "#5865F2", icon: "◉" },
-  { label: "AI Terminal",     id: "terminal",       color: "#10B981", icon: ">" },
-  { label: "Soul Check",      id: "soulsync",       color: "#8B5CF6", icon: "◈" },
-];
-
-// ── Live Activity Ticker ───────────────────────────────────────────────────
-const tickerMessages = [
-  "Research Agent scanned 14,203 sources",
-  "Sage adapted to Focused mode",
-  "Career Galaxy updated — 3 new matches",
-  "Workflow: Daily Focus executed at 09:41",
-  "Finance Projector: +$2,400 trajectory delta",
-  "Neural Debate: 3-way agent consensus reached",
-  "Study streak: Day 14 maintained",
-  "Network Engine: 2 high-value contacts flagged",
-  "Sleep Guard: Optimal wind-down in 40 min",
-  "Automation Builder: 1 workflow deployed",
-];
-
-function ActivityTicker() {
-  const msg = tickerMessages.join("  ·  ");
-  const doubled = msg + "  ·  " + msg;
-  return (
-    <div className="overflow-hidden rounded-lg border px-0 py-2 mb-6 relative"
-      style={{ background: "#080810", borderColor: "#1A1A22" }}>
-      <div className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(90deg, #080810, transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(-90deg, #080810, transparent)" }} />
+      ))}
       <motion.div
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 38, ease: "linear", repeat: Infinity }}
-        className="flex items-center gap-0 whitespace-nowrap px-4"
-        style={{ width: "max-content" }}
+        animate={doAnimate ? { scale: [1, 1.06, 1], boxShadow: ["0 0 30px rgba(139,92,246,0.55)", "0 0 55px rgba(139,92,246,0.85)", "0 0 30px rgba(139,92,246,0.55)"] } : {}}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        className="relative flex items-center justify-center rounded-full z-10"
+        style={{ width: core, height: core, background: "linear-gradient(135deg, #8B5CF6, #5865F2)" }}
       >
-        <span className="text-xs font-mono" style={{ color: "#5A5A6A" }}>{doubled}</span>
+        <span style={{ color: "white", fontSize: core * 0.35, fontWeight: 900 }}>◈</span>
       </motion.div>
     </div>
   );
 }
 
-// ── SoulSync Mini-Viz ──────────────────────────────────────────────────────
-const moodLabels = ["Calm", "Grounded", "Focused", "Reflective", "Motivated"];
-function SoulSyncViz() {
-  const [mood, setMood] = useState(0);
-  useEffect(() => { const t = setInterval(() => setMood(m => (m + 1) % moodLabels.length), 3200); return () => clearInterval(t); }, []);
+// ── Shared: Section Label ──────────────────────────────────────────────────
+function SectionLabel({ text, color = "#8B5CF6" }: { text: string; color?: string }) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
-      <div className="relative flex items-center justify-center" style={{ width: 110, height: 110 }}>
-        {[1.0, 0.68, 0.42].map((s, i) => (
-          <motion.div key={i}
-            animate={{ scale: [s, s * 1.16, s], opacity: [0.1, 0.2, 0.1] }}
-            transition={{ duration: 4, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
-            className="absolute rounded-full"
-            style={{ width: 110, height: 110, background: "radial-gradient(circle, #8B5CF6 0%, #5865F2 80%)", filter: "blur(3px)" }}
-          />
-        ))}
-        <motion.div animate={{ scale: [1, 1.06, 1] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="relative w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-black z-10"
-          style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)", boxShadow: "0 0 28px rgba(139,92,246,0.65)" }}>
-          ◈
-        </motion.div>
-      </div>
-      <AnimatePresence mode="wait">
-        <motion.div key={mood} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }}
-          transition={{ duration: 0.5 }}
-          className="mt-2.5 text-xs font-bold tracking-widest uppercase" style={{ color: "#A78BFA" }}>
-          {moodLabels[mood]} Mode
-        </motion.div>
-      </AnimatePresence>
+    <div className="flex items-center justify-center gap-3 mb-6">
+      <div className="h-px w-12 rounded-full" style={{ background: color + "50" }} />
+      <span className="text-xs font-mono tracking-[0.28em] uppercase" style={{ color }}>{text}</span>
+      <div className="h-px w-12 rounded-full" style={{ background: color + "50" }} />
     </div>
   );
 }
 
-// ── Agent Network Mini-Viz ─────────────────────────────────────────────────
-const AGENT_NAMES = ["Research", "Career", "Strategy", "Finance", "Study", "Wellness", "Code", "Legal", "Network", "Creative", "Debate"];
-function AgentViz() {
-  const [active, setActive] = useState([0, 3, 7]);
-  const [label, setLabel] = useState(AGENT_NAMES[0]);
+// ── SECTION 1: HERO ───────────────────────────────────────────────────────
+function HeroSection({ onSection, userName }: { onSection: (id: SectionId) => void; userName: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
-    const t = setInterval(() => {
-      const next = Math.floor(Math.random() * 11);
-      setActive(prev => {
-        const filtered = prev.filter(n => n !== next);
-        return filtered.length === prev.length ? [...prev.slice(-3), next] : filtered;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+    resize();
+    window.addEventListener("resize", resize);
+    type Pt = { x: number; y: number; vx: number; vy: number; alpha: number; size: number; hue: number };
+    const pts: Pt[] = Array.from({ length: 70 }, () => ({
+      x: Math.random(), y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.0005, vy: (Math.random() - 0.5) * 0.0005,
+      alpha: Math.random() * 0.3 + 0.05,
+      size: Math.random() * 1.8 + 0.5,
+      hue: 250 + Math.random() * 50,
+    }));
+    let raf: number;
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pts.forEach(p => {
+        p.x = (p.x + p.vx + 1) % 1; p.y = (p.y + p.vy + 1) % 1;
+        ctx.beginPath();
+        ctx.arc(p.x * canvas.width, p.y * canvas.height, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue},65%,70%,${p.alpha})`;
+        ctx.fill();
       });
-      setLabel(AGENT_NAMES[next]);
-    }, 1400);
-    return () => clearInterval(t);
-  }, []);
-
-  const R = 50, cx = 65, cy = 65;
-  return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-      <svg width="130" height="130" viewBox="0 0 130 130" overflow="visible">
-        {active.map(i => {
-          const a = (i / 11) * Math.PI * 2 - Math.PI / 2;
-          return (
-            <motion.line key={`ln-${i}`} x1={cx} y1={cy}
-              x2={cx + R * Math.cos(a)} y2={cy + R * Math.sin(a)}
-              stroke="#E50914" strokeWidth="0.7" strokeOpacity="0.4"
-              initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            />
-          );
-        })}
-        {AGENT_NAMES.map((_, i) => {
-          const a = (i / 11) * Math.PI * 2 - Math.PI / 2;
-          const x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
-          const isOn = active.includes(i);
-          return (
-            <g key={i}>
-              {isOn && (
-                <motion.circle cx={x} cy={y} r={9} fill="#E50914" opacity={0.12}
-                  animate={{ r: [9, 14, 9] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }} />
-              )}
-              <circle cx={x} cy={y} r={3.5} fill={isOn ? "#E50914" : "#2A2A2E"}
-                stroke={isOn ? "#FF3B47" : "#3A3A3E"} strokeWidth="1" />
-            </g>
-          );
-        })}
-        <motion.circle cx={cx} cy={cy} r={13} fill="none" stroke="#E50914" strokeWidth="1.5" strokeOpacity="0.4"
-          animate={{ r: [13, 17, 13] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} />
-        <circle cx={cx} cy={cy} r={9} fill="#E50914" fillOpacity="0.14" />
-        <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" fill="#E50914" fontSize="12" fontWeight="900">AI</text>
-      </svg>
-      <div className="absolute bottom-3 left-0 right-0 flex justify-center">
-        <AnimatePresence mode="wait">
-          <motion.span key={label} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }} className="text-xs font-mono" style={{ color: "#E50914" }}>
-            {label} activated
-          </motion.span>
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
-
-// ── Workflow Pipeline Viz ──────────────────────────────────────────────────
-const WF_STEPS = ["Trigger", "Analyze", "Execute", "Verify", "Deploy", "Report"];
-const WF_NAMES = ["Daily Focus", "Research", "Finance Scan", "Study Streak", "Network", "Sleep Guard"];
-function WorkflowViz() {
-  const [step, setStep] = useState(0);
-  const [wfIdx, setWfIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => {
-      setStep(s => {
-        if (s >= WF_STEPS.length - 1) { setWfIdx(w => (w + 1) % WF_NAMES.length); return 0; }
-        return s + 1;
-      });
-    }, 800);
-    return () => clearInterval(t);
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
   }, []);
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 pointer-events-none select-none px-5">
-      <div className="flex items-center w-full max-w-[220px] gap-0">
-        {WF_STEPS.map((node, i) => (
-          <div key={node} className="flex items-center flex-1 min-w-0">
-            <motion.div
-              animate={{
-                background: i < step ? "#A78BFA18" : i === step ? "#A78BFA28" : "#141420",
-                color: i <= step ? "#A78BFA" : "#4A4A5A",
-                borderColor: i <= step ? "#A78BFA40" : "#1E1E2A",
-              }}
-              transition={{ duration: 0.4 }}
-              className="flex-1 text-center rounded py-1.5 text-[10px] font-bold border min-w-0 truncate px-1"
-              style={{ boxShadow: i === step ? "0 0 10px rgba(167,139,250,0.25)" : "none" }}
-            >
-              {node}
-            </motion.div>
-            {i < WF_STEPS.length - 1 && (
-              <motion.div className="h-px w-2 shrink-0"
-                animate={{ background: i < step ? "#A78BFA60" : "#1E1E2A" }}
-                transition={{ duration: 0.4 }} />
-            )}
-          </div>
-        ))}
-      </div>
-      <AnimatePresence mode="wait">
-        <motion.div key={wfIdx} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }} className="text-xs font-mono" style={{ color: "#A78BFA" }}>
-          Running: {WF_NAMES[wfIdx]}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(139,92,246,0.10) 0%, rgba(88,101,242,0.05) 50%, transparent 80%)" }} />
+
+      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto px-6 py-24">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mb-8">
+          <SoulOrb size={140} />
         </motion.div>
-      </AnimatePresence>
-      <div className="flex flex-wrap gap-1 justify-center">
-        {WF_NAMES.map((wf, i) => (
-          <motion.div key={wf}
-            animate={{ opacity: i === wfIdx ? 1 : 0.28 }}
-            transition={{ duration: 0.5 }}
-            className="text-[10px] font-mono px-1.5 py-0.5 rounded"
-            style={{ color: "#A78BFA", background: "#A78BFA0F", border: "1px solid #A78BFA20" }}>
-            {wf}
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}>
+          <SectionLabel text="SoulSync · Emotionally Intelligent AI" color="#8B5CF6" />
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.1 }}
+          className="text-xs font-mono tracking-widest mb-4" style={{ color: "#5A5A6A" }}>
+          Welcome back, {userName}.
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          className="font-black leading-none tracking-tight mb-6"
+          style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(2.4rem, 6vw, 4.5rem)" }}
+        >
+          <span className="text-white">You Were Never Meant</span><br />
+          <span style={{ color: "#8B5CF6" }}>To Fight Your Mind</span><br />
+          <span className="text-white">Alone.</span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.7 }}
+          className="text-lg leading-relaxed mb-10 max-w-2xl"
+          style={{ color: "#7A7A8A" }}
+        >
+          SoulSync is an emotionally intelligent AI companion that helps you recover focus, rebuild discipline,
+          reduce emotional overwhelm, and evolve with adaptive intelligence — one session at a time.
+        </motion.p>
+
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}
+          className="flex items-center gap-4 flex-wrap justify-center">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(139,92,246,0.5)" }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => onSection("soulsync")}
+            className="px-8 py-4 rounded-2xl font-bold text-white text-base"
+            style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)" }}
+          >
+            Begin Recovery
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.04, borderColor: "#8B5CF6" }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => onSection("soulsync")}
+            className="px-8 py-4 rounded-2xl font-semibold text-base border transition-all"
+            style={{ color: "#A78BFA", borderColor: "rgba(139,92,246,0.35)", background: "rgba(139,92,246,0.06)" }}
+          >
+            Meet Sage AI
+          </motion.button>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
+          className="mt-16 flex items-center gap-2">
+          <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M9 3V15M4 10L9 15L14 10" stroke="#5A5A6A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </motion.div>
-        ))}
+          <span className="text-xs font-mono" style={{ color: "#4A4A5A" }}>scroll to explore</span>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
 
-// ── Celestial Map Viz ─────────────────────────────────────────────────────
-const CAREER_NODES = [
-  { label: "AI Eng", x: 50, y: 22, score: 96 },
-  { label: "Founder", x: 78, y: 38, score: 79 },
-  { label: "Data Sci", x: 22, y: 50, score: 91 },
-  { label: "Designer", x: 50, y: 66, score: 88 },
-  { label: "Full Stack", x: 76, y: 62, score: 87 },
+// ── SECTION 2: SAGE DEMO ──────────────────────────────────────────────────
+const conversations = [
+  {
+    user: "I feel mentally exhausted and can't focus anymore.",
+    sage: "That sounds like you've been carrying too much without real recovery time. Your mind isn't broken — it's overwhelmed. Let's start small, together.",
+    action: "Focus Sprint recommended · 25 min",
+    actionColor: "#F59E0B",
+    mood: "Overwhelmed",
+    moodColor: "#EC4899",
+  },
+  {
+    user: "I haven't felt motivated in weeks. Everything feels heavy.",
+    sage: "Low motivation is often a signal of emotional depletion, not laziness. Your system needs restoration before it can rebuild momentum.",
+    action: "Daily Recovery queued · Mood check-in",
+    actionColor: "#8B5CF6",
+    mood: "Depleted",
+    moodColor: "#8B5CF6",
+  },
+  {
+    user: "I feel lonely even when I'm surrounded by people.",
+    sage: "That kind of loneliness runs deeper — it's a disconnect between who you are and how you're living. You're not alone in feeling this way.",
+    action: "Sage companion active · Ambient mode on",
+    actionColor: "#5865F2",
+    mood: "Disconnected",
+    moodColor: "#5865F2",
+  },
 ];
-function CelestialViz() {
-  const [pulse, setPulse] = useState(0);
-  const [activeNode, setActiveNode] = useState(0);
+
+function SageDemo({ onSection }: { onSection: (id: SectionId) => void }) {
+  const [idx, setIdx] = useState(0);
+  const [phase, setPhase] = useState<"user" | "sage" | "action">("user");
+
   useEffect(() => {
-    const t1 = setInterval(() => setPulse(p => (p + 1) % 60), 50);
-    const t2 = setInterval(() => setActiveNode(n => (n + 1) % CAREER_NODES.length), 1600);
-    return () => { clearInterval(t1); clearInterval(t2); };
-  }, []);
-  const stars = Array.from({ length: 28 }, (_, i) => ({
-    x: ((i * 47 + 13) % 100),
-    y: ((i * 31 + 7) % 100),
-    r: 0.6 + (i % 3) * 0.4,
-    phase: i * 0.4,
-  }));
-  return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-      <svg width="140" height="140" viewBox="0 0 140 140" overflow="visible">
-        {stars.map((s, i) => (
-          <circle key={i} cx={s.x * 1.4} cy={s.y * 1.4} r={s.r}
-            fill="white" fillOpacity={0.15 + Math.abs(Math.sin(pulse * 0.08 + s.phase)) * 0.4} />
-        ))}
-        <circle cx="70" cy="70" r="38" fill="none" stroke="#10B981" strokeWidth="0.5" strokeOpacity="0.2" />
-        <circle cx="70" cy="70" r="55" fill="none" stroke="#10B981" strokeWidth="0.3" strokeOpacity="0.1" />
-        {CAREER_NODES.map((node, i) => {
-          const x = node.x * 1.4;
-          const y = node.y * 1.4;
-          const isActive = i === activeNode;
-          return (
-            <g key={node.label}>
-              <line x1="70" y1="70" x2={x} y2={y} stroke="#10B981" strokeWidth="0.6" strokeOpacity={isActive ? 0.5 : 0.12} />
-              {isActive && (
-                <motion.circle cx={x} cy={y} r={10} fill="#10B981" fillOpacity={0.12}
-                  animate={{ r: [10, 15, 10] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} />
-              )}
-              <circle cx={x} cy={y} r={isActive ? 4.5 : 3}
-                fill={isActive ? "#10B981" : "#1E3A2E"} stroke="#10B981" strokeWidth={isActive ? 1.5 : 0.8} strokeOpacity="0.8" />
-            </g>
-          );
-        })}
-        <motion.circle cx="70" cy="70" r="10" fill="#10B981" fillOpacity="0.18"
-          animate={{ r: [10, 14, 10] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} />
-        <circle cx="70" cy="70" r="6" fill="#10B981" fillOpacity="0.35" />
-        <text x="70" y="70" textAnchor="middle" dominantBaseline="middle" fill="#10B981" fontSize="8" fontWeight="900">◎</text>
-      </svg>
-      <div className="absolute bottom-3 left-0 right-0 flex justify-center">
-        <AnimatePresence mode="wait">
-          <motion.span key={activeNode} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }} className="text-xs font-mono" style={{ color: "#10B981" }}>
-            {CAREER_NODES[activeNode]?.label} — match score {CAREER_NODES[activeNode]?.score}
-          </motion.span>
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
+    setPhase("user");
+    const t1 = setTimeout(() => setPhase("sage"), 1400);
+    const t2 = setTimeout(() => setPhase("action"), 3200);
+    const t3 = setTimeout(() => setIdx(i => (i + 1) % conversations.length), 5800);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [idx]);
 
-// ── Featured Card Data ─────────────────────────────────────────────────────
-const featuredDefs = [
-  {
-    id: "soulsync" as SectionId,
-    color: "#8B5CF6",
-    bg: "linear-gradient(160deg, #0E0820 0%, #0A0A1C 100%)",
-    border: "rgba(139,92,246,0.28)",
-    glow: "rgba(139,92,246,0.13)",
-    label: "Wellness Core",
-    title: "SoulSync Companion",
-    subtitle: "Your emotionally intelligent AI. Sage reads your mood, adapts in real time, and guides every session.",
-    tags: ["Sage AI", "5 Modes", "Recovery Quests", "Psychologists"],
-    Viz: SoulSyncViz,
-  },
-  {
-    id: "agents" as SectionId,
-    color: "#E50914",
-    bg: "linear-gradient(160deg, #160509 0%, #0B0B0F 100%)",
-    border: "rgba(229,9,20,0.25)",
-    glow: "rgba(229,9,20,0.11)",
-    label: "Intelligence Core",
-    title: "AI Agent Network",
-    subtitle: "11 autonomous intelligences running in parallel — researching, debating, and executing simultaneously.",
-    tags: ["11 Agents", "Live Debate", "Auto-Execute", "Neural Link"],
-    Viz: AgentViz,
-  },
-  {
-    id: "workflows" as SectionId,
-    color: "#A78BFA",
-    bg: "linear-gradient(160deg, #100B1C 0%, #0A0B16 100%)",
-    border: "rgba(167,139,250,0.25)",
-    glow: "rgba(167,139,250,0.11)",
-    label: "Automation Core",
-    title: "Workflow Universe",
-    subtitle: "6 autonomous pipelines execute silently. Daily Focus, Finance Scan, Sleep Guard — running without you.",
-    tags: ["6 Workflows", "Auto-Trigger", "Live Execution", "Zero Effort"],
-    Viz: WorkflowViz,
-  },
-  {
-    id: "career-galaxy" as SectionId,
-    color: "#10B981",
-    bg: "linear-gradient(160deg, #051510 0%, #060D0A 100%)",
-    border: "rgba(16,185,129,0.22)",
-    glow: "rgba(16,185,129,0.10)",
-    label: "Career Core",
-    title: "Career Galaxy",
-    subtitle: "Your cosmic career atlas. Navigate paths, match opportunities, and chart your trajectory across the stars.",
-    tags: ["10 Career Nodes", "Salary Data", "Match Score", "Live Paths"],
-    Viz: CelestialViz,
-  },
-];
-
-// ── Props ──────────────────────────────────────────────────────────────────
-interface Props {
-  onSection: (id: SectionId) => void;
-  user: { name: string; plan: string };
-}
-
-// ── Main Component ─────────────────────────────────────────────────────────
-export default function MainHub({ onSection, user }: Props) {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [search, setSearch] = useState("");
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const greeting = useTimeGreeting();
-
-  const agentsVal  = useCounter(11,    1800, 200);
-  const sectionsVal= useCounter(25,    2000, 300);
-  const usersVal   = useCounter(12847, 2400, 400);
-
-  const nonFeatured = sections.filter(s => !["soulsync", "agents", "workflows"].includes(s.id));
-  const filtered = nonFeatured.filter(s => {
-    const matchCat = activeCategory === "All" || s.category === activeCategory;
-    const matchSrch = !search || s.name.toLowerCase().includes(search.toLowerCase()) || s.desc.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSrch;
-  });
-
-  const showGrouped = activeCategory === "All" && !search;
-  const groupedCategories = ["Wellness", "Intelligence", "Career", "Learning", "Automation", "Personal"];
+  const convo = conversations[idx]!;
 
   return (
-    <div className="min-h-screen" style={{ background: "#0B0B0F" }}>
-      {/* Dot grid */}
-      <div className="fixed inset-0 pointer-events-none z-0"
-        style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.022) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+    <section className="relative py-28 px-6 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(88,101,242,0.06) 0%, transparent 70%)" }} />
 
-      {/* Ambient blobs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <motion.div animate={{ opacity: [0.045, 0.09, 0.045], x: [0, 25, 0] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute rounded-full blur-[180px]" style={{ width: 800, height: 500, left: "10%", top: "-8%", background: "#E50914" }} />
-        <motion.div animate={{ opacity: [0.03, 0.06, 0.03], x: [0, -18, 0] }} transition={{ duration: 22, repeat: Infinity, delay: 5, ease: "easeInOut" }}
-          className="absolute rounded-full blur-[140px]" style={{ width: 600, height: 400, right: "2%", bottom: "12%", background: "#8B5CF6" }} />
-        <motion.div animate={{ opacity: [0.02, 0.045, 0.02] }} transition={{ duration: 16, repeat: Infinity, delay: 9, ease: "easeInOut" }}
-          className="absolute rounded-full blur-[120px]" style={{ width: 500, height: 300, left: "48%", bottom: "22%", background: "#5865F2" }} />
-      </div>
+      <div className="max-w-3xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <SectionLabel text="Live AI Companion" color="#5865F2" />
+          <h2 className="text-4xl md:text-5xl font-black text-white text-center mb-4 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
+            Meet <span style={{ color: "#8B5CF6" }}>Sage.</span>
+          </h2>
+          <p className="text-base text-center mb-12" style={{ color: "#6A6A7A" }}>
+            Your emotionally intelligent AI companion. Sage listens, adapts, and guides you through every moment.
+          </p>
+        </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 pb-20">
+        <div className="rounded-3xl border overflow-hidden" style={{ background: "#0C0C14", borderColor: "#1E1E2C" }}>
+          {/* Mood bar */}
+          <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "#1A1A24", background: "#08080F" }}>
+            <div className="flex items-center gap-2">
+              <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-2 h-2 rounded-full" style={{ background: "#10B981" }} />
+              <span className="text-xs font-mono" style={{ color: "#10B981" }}>Sage · Active</span>
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div key={idx} initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
+                className="text-xs font-mono px-3 py-1 rounded-full border"
+                style={{ color: convo.moodColor, borderColor: convo.moodColor + "40", background: convo.moodColor + "0F" }}>
+                Mood detected: {convo.mood}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-        {/* ─── HERO ──────────────────────────────────────────── */}
-        <div className="pt-10 pb-8">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: "easeOut" }}>
-            <div className="flex items-start justify-between gap-6 flex-wrap">
-
-              {/* Left: greeting + stats */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div animate={{ opacity: [1, 0.25, 1] }} transition={{ duration: 1.6, repeat: Infinity }}
-                    className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#10B981" }} />
-                  <span className="text-[10px] font-mono tracking-widest" style={{ color: "#10B981" }}>ALL SYSTEMS OPERATIONAL</span>
-                  <span className="text-[10px] font-mono" style={{ color: "#2A2A2E" }}>·</span>
-                  <span className="text-[10px] font-mono" style={{ color: "#5A5A6A" }}>APEX OS v2.0</span>
-                </div>
-
-                <div className="text-xs font-mono tracking-widest uppercase mb-2" style={{ color: "#5A5A6A" }}>
-                  {greeting}
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight mb-4"
-                  style={{ fontFamily: "'Syne', sans-serif" }}>
-                  {user.name}<span style={{ color: "#E50914" }}>.</span>
-                </h1>
-                <p className="text-sm md:text-base mb-6 max-w-lg leading-relaxed" style={{ color: "#6A6A7A" }}>
-                  Your intelligence ecosystem is fully operational. Select a module or use Quick Actions below.
-                </p>
-
-                {/* Stat pills */}
-                <div className="flex flex-wrap gap-2.5">
-                  {[
-                    { v: `${agentsVal} / 11`, label: "Agents Online",  color: "#10B981" },
-                    { v: `${sectionsVal}`,    label: "Modules Live",   color: "#E50914" },
-                    { v: `${usersVal.toLocaleString()}`, label: "Users",  color: "#F59E0B" },
-                    { v: user.plan === "elite" ? "Elite" : user.plan === "pro" ? "Pro" : "Free", label: "Your Plan", color: user.plan === "free" ? "#5A5A6A" : "#F59E0B" },
-                  ].map(({ v, label, color }) => (
-                    <motion.div key={label} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      className="flex items-center gap-2 px-4 py-2 rounded-full border"
-                      style={{ background: color + "0C", borderColor: color + "28" }}>
-                      <span className="font-black text-sm" style={{ color, fontFamily: "'Syne', sans-serif" }}>{v}</span>
-                      <span className="text-xs" style={{ color: "#5A5A6A" }}>{label}</span>
-                    </motion.div>
-                  ))}
-                  {user.plan === "free" && (
-                    <motion.button whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(229,9,20,0.3)" }}
-                      whileTap={{ scale: 0.97 }} onClick={() => onSection("subscription")}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold text-white"
-                      style={{ background: "linear-gradient(135deg, #E50914, #A00" }}>
-                      Upgrade →
-                    </motion.button>
-                  )}
-                </div>
-              </div>
-
-              {/* Right: Neural Score */}
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                className="shrink-0 flex flex-col items-center gap-3">
-                <NeuralScoreRing score={78} />
-                <div className="text-center">
-                  <div className="text-[10px] font-mono" style={{ color: "#5A5A6A" }}>Rank #2,847</div>
+          <div className="p-8 space-y-6 min-h-[260px]">
+            {/* User message */}
+            <AnimatePresence mode="wait">
+              <motion.div key={`u-${idx}`} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
+                className="flex justify-end">
+                <div className="max-w-[78%] rounded-2xl rounded-tr-sm px-5 py-3.5 text-sm leading-relaxed"
+                  style={{ background: "#1C1C2C", color: "#C8C8D8" }}>
+                  {convo.user}
                 </div>
               </motion.div>
-            </div>
-          </motion.div>
+            </AnimatePresence>
+
+            {/* Sage response */}
+            <AnimatePresence>
+              {(phase === "sage" || phase === "action") && (
+                <motion.div key={`s-${idx}`} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
+                  className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+                    style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)" }}>
+                    <span className="text-white font-black text-sm">◈</span>
+                  </div>
+                  <div className="max-w-[78%] rounded-2xl rounded-tl-sm px-5 py-3.5 text-sm leading-relaxed"
+                    style={{ background: "rgba(139,92,246,0.10)", color: "#D4D4E8", border: "1px solid rgba(139,92,246,0.18)" }}>
+                    {convo.sage}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Action suggestion */}
+            <AnimatePresence>
+              {phase === "action" && (
+                <motion.div key={`a-${idx}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                  className="flex justify-center">
+                  <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-semibold"
+                    style={{ color: convo.actionColor, borderColor: convo.actionColor + "40", background: convo.actionColor + "0C" }}>
+                    <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1, repeat: Infinity }}
+                      className="w-1.5 h-1.5 rounded-full" style={{ background: convo.actionColor }} />
+                    {convo.action}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Progress dots */}
+          <div className="flex justify-center gap-2 pb-6">
+            {conversations.map((_, i) => (
+              <button key={i} onClick={() => setIdx(i)}
+                className="rounded-full transition-all duration-300"
+                style={{ width: i === idx ? 24 : 8, height: 6, background: i === idx ? "#8B5CF6" : "#2A2A3A" }} />
+            ))}
+          </div>
         </div>
 
-        {/* ─── BRIEFING + QUICK ACTIONS ──────────────────────── */}
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          {/* Briefing */}
-          <DailyBriefing />
+        <div className="flex justify-center mt-8">
+          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+            onClick={() => onSection("soulsync")}
+            className="px-7 py-3.5 rounded-xl font-semibold text-white text-sm border"
+            style={{ borderColor: "rgba(139,92,246,0.4)", background: "rgba(139,92,246,0.08)", color: "#A78BFA" }}>
+            Start talking to Sage →
+          </motion.button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          {/* Quick actions */}
-          <div className="rounded-xl border p-4" style={{ background: "#0C0C12", borderColor: "#1E1E24" }}>
-            <div className="text-xs font-mono tracking-widest mb-3" style={{ color: "#5A5A6A" }}>QUICK ACTIONS</div>
-            <div className="grid grid-cols-3 gap-2">
-              {quickActions.map((qa) => (
-                <motion.button key={qa.id}
-                  whileHover={{ scale: 1.04, boxShadow: `0 4px 18px ${qa.color}22` }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => onSection(qa.id)}
-                  className="flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl border text-center transition-all"
-                  style={{ background: qa.color + "0C", borderColor: qa.color + "22" }}>
-                  <span className="text-lg" style={{ color: qa.color }}>{qa.icon}</span>
-                  <span className="text-xs font-bold leading-tight" style={{ color: qa.color }}>{qa.label}</span>
-                </motion.button>
-              ))}
-            </div>
-          </div>
+// ── SECTION 3: RECOVERY SYSTEMS ───────────────────────────────────────────
+const recoveryItems = [
+  { name: "Focus Sprint",         desc: "Rebuild concentration slowly, session by session.",          id: "focus-sprint" as SectionId, color: "#F59E0B", icon: "⏱" },
+  { name: "Daily Recovery",       desc: "Small wins compound into lasting momentum.",                 id: "recovery" as SectionId,     color: "#8B5CF6", icon: "◉" },
+  { name: "Mood Reflection",      desc: "Understand emotional patterns before they spiral.",          id: "soulsync" as SectionId,     color: "#5865F2", icon: "◈" },
+  { name: "Ambient Soundscapes",  desc: "Calm your nervous system through targeted audio.",           id: "ambient" as SectionId,      color: "#06B6D4", icon: "◆" },
+  { name: "Breathing Protocol",   desc: "Reduce anxiety in real time. The 4-4-6 method.",            id: "breathing" as SectionId,    color: "#10B981", icon: "◇" },
+  { name: "Sleep Stabilizer",     desc: "Repair cognitive energy through sleep optimization.",        id: "soulsync" as SectionId,     color: "#A78BFA", icon: "◎" },
+];
+
+function RecoverySystems({ onSection }: { onSection: (id: SectionId) => void }) {
+  const [hovered, setHovered] = useState<string | null>(null);
+  return (
+    <section className="relative py-28 px-6">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.05) 0%, transparent 60%)" }} />
+      <div className="max-w-5xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-14">
+          <SectionLabel text="Recovery Layers" color="#8B5CF6" />
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
+            Built For You <span style={{ color: "#8B5CF6" }}>To Recover.</span>
+          </h2>
+          <p className="text-base max-w-xl mx-auto" style={{ color: "#6A6A7A" }}>
+            Each layer targets a specific dimension of human restoration. Not tools — lifelines.
+          </p>
         </motion.div>
 
-        {/* ─── ACTIVITY TICKER ───────────────────────────────── */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
-          <ActivityTicker />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {recoveryItems.map((item, i) => (
+            <motion.div key={item.name}
+              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.07 }}
+              whileHover={{ y: -6 }}
+              onHoverStart={() => setHovered(item.name)}
+              onHoverEnd={() => setHovered(null)}
+              onClick={() => onSection(item.id)}
+              className="relative rounded-2xl border cursor-pointer overflow-hidden p-6 flex flex-col gap-4 transition-all"
+              style={{
+                background: "#0C0C14",
+                borderColor: hovered === item.name ? item.color + "40" : "#1A1A24",
+                boxShadow: hovered === item.name ? `0 12px 40px ${item.color}18` : "none",
+              }}>
+              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${item.color}60, transparent)` }} />
+
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"
+                style={{ background: item.color + "14", color: item.color }}>
+                {item.icon}
+              </div>
+              <div>
+                <div className="font-black text-base text-white mb-1.5" style={{ fontFamily: "'Syne', sans-serif" }}>{item.name}</div>
+                <div className="text-sm leading-relaxed" style={{ color: "#6A6A7A" }}>{item.desc}</div>
+              </div>
+              <motion.div animate={{ x: hovered === item.name ? 4 : 0 }} className="flex items-center gap-1.5 text-xs font-semibold mt-auto" style={{ color: item.color }}>
+                Open layer
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5H8M5.5 2.5L8 5L5.5 7.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── SECTION 4: HUMAN LAYER ─────────────────────────────────────────────────
+const psychologists = [
+  { name: "Dr. Aisha Patel",  specialty: "Burnout & Emotional Recovery", sessions: "1,247",  rating: "4.97", available: true,  badge: "Top Rated",       color: "#8B5CF6" },
+  { name: "Dr. Marcus Lin",   specialty: "Anxiety & Focus Rebuilding",    sessions: "892",    rating: "4.95", available: true,  badge: "Most Requested",  color: "#5865F2" },
+  { name: "Dr. Sofia Reyes",  specialty: "Identity & Personal Growth",    sessions: "2,103",  rating: "4.99", available: false, badge: "Expert",          color: "#A78BFA" },
+];
+
+function HumanLayer({ onSection }: { onSection: (id: SectionId) => void }) {
+  return (
+    <section className="relative py-28 px-6 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 80% 50%, rgba(88,101,242,0.06) 0%, transparent 60%)" }} />
+      <div className="max-w-5xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-14">
+          <SectionLabel text="The Human Layer" color="#5865F2" />
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
+            When AI Support<br />
+            <span style={{ color: "#5865F2" }}>Isn't Enough, Humans Step In.</span>
+          </h2>
+          <p className="text-base max-w-xl mx-auto" style={{ color: "#6A6A7A" }}>
+            Verified psychologists seamlessly continue where SoulSync leaves off — no gap, no friction, full context.
+          </p>
         </motion.div>
 
-        {/* ─── FEATURED CARDS ────────────────────────────────── */}
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="text-xs font-bold tracking-[0.22em] uppercase" style={{ color: "#5A5A6A" }}>Core Modules</div>
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #2A2A2E, transparent)" }} />
-            <div className="text-xs font-mono" style={{ color: "#3A3A4A" }}>Live</div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-            {featuredDefs.map(({ id, color, bg, border, glow, label, title, subtitle, tags, Viz }, idx) => (
-              <motion.div key={id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 + idx * 0.12, ease: "easeOut" }}
-                whileHover={{ y: -5, transition: { duration: 0.25 } }}
-                whileTap={{ scale: 0.985, transition: { duration: 0.1 } }}
-                onClick={() => onSection(id)}
-                onHoverStart={() => setHoveredCard(id)}
-                onHoverEnd={() => setHoveredCard(null)}
-                className="relative rounded-2xl border cursor-pointer overflow-hidden flex flex-col"
-                style={{ background: bg, borderColor: border, minHeight: 300 }}>
-                {/* Top glow bar */}
-                <div className="absolute top-0 left-0 right-0 h-px"
-                  style={{ background: `linear-gradient(90deg, transparent, ${color}90, transparent)` }} />
-                {/* Radial glow bg */}
-                <div className="absolute inset-0 pointer-events-none"
-                  style={{ background: `radial-gradient(circle at 75% 15%, ${glow}, transparent 65%)` }} />
-
-                {/* Viz area — fixed height so card content aligns */}
-                <div className="relative shrink-0" style={{ height: 148 }}>
-                  <Viz />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+          {psychologists.map((p, i) => (
+            <motion.div key={p.name}
+              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="rounded-2xl border p-6 flex flex-col gap-4"
+              style={{ background: "#0C0C14", borderColor: "#1A1A24" }}>
+              <div className="flex items-start justify-between">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg text-white"
+                  style={{ background: `linear-gradient(135deg, ${p.color}, ${p.color}88)` }}>
+                  {p.name.split(" ")[1]?.[0] ?? "?"}
                 </div>
+                <span className="text-xs font-bold px-2.5 py-1 rounded-full"
+                  style={{ color: p.color, background: p.color + "15" }}>{p.badge}</span>
+              </div>
+              <div>
+                <div className="font-black text-white text-sm mb-0.5" style={{ fontFamily: "'Syne', sans-serif" }}>{p.name}</div>
+                <div className="text-xs" style={{ color: "#6A6A7A" }}>{p.specialty}</div>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span style={{ color: "#5A5A6A" }}>{p.sessions} sessions</span>
+                <span style={{ color: "#F59E0B" }}>★ {p.rating}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full" style={{ background: p.available ? "#10B981" : "#3A3A4A" }} />
+                <span className="text-xs" style={{ color: p.available ? "#10B981" : "#5A5A6A" }}>
+                  {p.available ? "Available now · from $12/session" : "Waitlist open"}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-                {/* Card body */}
-                <div className="relative px-5 pb-5 flex flex-col flex-1">
-                  <div className="text-[11px] font-bold tracking-widest uppercase mb-1" style={{ color: color + "BB" }}>{label}</div>
-                  <div className="font-black text-[17px] text-white mb-2 leading-snug" style={{ fontFamily: "'Syne', sans-serif" }}>{title}</div>
-                  <div className="text-xs leading-relaxed mb-3 flex-1" style={{ color: "#8A8A9A" }}>{subtitle}</div>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {tags.map(t => (
-                      <span key={t} className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                        style={{ background: color + "14", color, border: `1px solid ${color}28` }}>{t}</span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                      <motion.span animate={{ opacity: [1, 0.25, 1] }} transition={{ duration: 1.5, repeat: Infinity }}
-                        className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#10B981" }} />
-                      <span className="text-xs font-mono" style={{ color: "#10B981" }}>Live</span>
-                    </div>
-                    <motion.div animate={{ x: hoveredCard === id ? 4 : 0 }} transition={{ duration: 0.2 }}
-                      className="flex items-center gap-1 text-sm font-bold" style={{ color }}>
-                      Enter
-                      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                        <path d="M2.5 6H9.5M6.5 3L9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </motion.div>
+        <div className="flex justify-center">
+          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+            onClick={() => onSection("psychologists")}
+            className="px-7 py-3.5 rounded-xl font-semibold text-sm"
+            style={{ background: "rgba(88,101,242,0.10)", color: "#818CF8", border: "1px solid rgba(88,101,242,0.3)" }}>
+            Browse All Psychologists →
+          </motion.button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── SECTION 5: HOW SOULSYNC WORKS ─────────────────────────────────────────
+const emotionAgents = [
+  { name: "Focus",      color: "#F59E0B" },
+  { name: "Emotion",    color: "#EC4899" },
+  { name: "Pattern",    color: "#8B5CF6" },
+  { name: "Habit",      color: "#10B981" },
+  { name: "Motivation", color: "#E50914" },
+  { name: "Recovery",   color: "#06B6D4" },
+  { name: "Sleep",      color: "#A78BFA" },
+  { name: "Cognitive",  color: "#F97316" },
+];
+
+function NeuralIntelligence({ onSection }: { onSection: (id: SectionId) => void }) {
+  const [activeAgent, setActiveAgent] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setActiveAgent(a => (a + 1) % emotionAgents.length), 900);
+    return () => clearInterval(t);
+  }, []);
+
+  const R = 110, cx = 160, cy = 160;
+
+  return (
+    <section className="relative py-28 px-6 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.06) 0%, transparent 65%)" }} />
+      <div className="max-w-5xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-14">
+          <SectionLabel text="How SoulSync Works" color="#A78BFA" />
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
+            Powered By Parallel<br />
+            <span style={{ color: "#A78BFA" }}>Emotional Intelligence.</span>
+          </h2>
+          <p className="text-base max-w-xl mx-auto" style={{ color: "#6A6A7A" }}>
+            11 AI agents operate in parallel — sensing, adapting, and responding to your emotional state in real time.
+          </p>
+        </motion.div>
+
+        <div className="flex flex-col lg:flex-row items-center gap-14">
+          {/* Orbital SVG */}
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="shrink-0">
+            <svg width="320" height="320" viewBox="0 0 320 320">
+              <circle cx={cx} cy={cy} r={R} fill="none" stroke="#1E1E2C" strokeWidth="1" strokeDasharray="4 6" />
+              {emotionAgents.map((agent, i) => {
+                const angle = (i / emotionAgents.length) * Math.PI * 2 - Math.PI / 2;
+                const x = cx + R * Math.cos(angle);
+                const y = cy + R * Math.sin(angle);
+                const isActive = i === activeAgent;
+                return (
+                  <g key={agent.name}>
+                    <motion.line x1={cx} y1={cy} x2={x} y2={y}
+                      stroke={agent.color} strokeWidth={isActive ? 1.2 : 0.4}
+                      strokeOpacity={isActive ? 0.7 : 0.15}
+                      animate={{ strokeOpacity: isActive ? 0.7 : 0.12 }} transition={{ duration: 0.4 }} />
+                    {isActive && (
+                      <motion.circle cx={x} cy={y} r={18} fill={agent.color} fillOpacity={0.1}
+                        animate={{ r: [18, 26, 18] }} transition={{ duration: 0.9, repeat: Infinity }} />
+                    )}
+                    <circle cx={x} cy={y} r={isActive ? 7 : 5}
+                      fill={isActive ? agent.color : "#141420"}
+                      stroke={agent.color} strokeWidth={isActive ? 2 : 1} strokeOpacity="0.7" />
+                    <text x={x} y={y + (y > cy ? 22 : -14)} textAnchor="middle"
+                      fill={isActive ? agent.color : "#3A3A4A"} fontSize="10" fontWeight={isActive ? "700" : "400"}>
+                      {agent.name}
+                    </text>
+                  </g>
+                );
+              })}
+              {/* Center orb */}
+              <motion.circle cx={cx} cy={cy} r={30} fill="#8B5CF6" fillOpacity={0.12}
+                animate={{ r: [30, 38, 30] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }} />
+              <circle cx={cx} cy={cy} r={22} fill="url(#orbGrad)" />
+              <defs>
+                <radialGradient id="orbGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#A78BFA" />
+                  <stop offset="100%" stopColor="#5865F2" />
+                </radialGradient>
+              </defs>
+              <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="14" fontWeight="900">◈</text>
+            </svg>
+          </motion.div>
+
+          {/* Agent list */}
+          <div className="flex-1 grid grid-cols-2 gap-3">
+            {emotionAgents.map((agent, i) => (
+              <motion.div key={agent.name}
+                initial={{ opacity: 0, x: 12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="flex items-center gap-3 rounded-xl p-3.5 border transition-all duration-300"
+                style={{
+                  borderColor: i === activeAgent ? agent.color + "40" : "#1A1A24",
+                  background: i === activeAgent ? agent.color + "08" : "#0C0C14",
+                }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs shrink-0"
+                  style={{ background: agent.color + "18", color: agent.color }}>◈</div>
+                <div>
+                  <div className="text-xs font-bold text-white">{agent.name} Agent</div>
+                  <div className="text-xs" style={{ color: i === activeAgent ? agent.color : "#4A4A5A" }}>
+                    {i === activeAgent ? "Active" : "Monitoring"}
                   </div>
                 </div>
               </motion.div>
@@ -678,182 +532,181 @@ export default function MainHub({ onSection, user }: Props) {
           </div>
         </div>
 
-        {/* ─── SEARCH + FILTERS ──────────────────────────────── */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="text-xs font-bold tracking-[0.22em] uppercase" style={{ color: "#5A5A6A" }}>All Modules</div>
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #2A2A2E, transparent)" }} />
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 mb-6">
-            {/* Search */}
-            <div className="relative sm:w-72">
-              <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 shrink-0" width="13" height="13" viewBox="0 0 14 14" fill="none">
-                <circle cx="6" cy="6" r="4.5" stroke="#5A5A6A" strokeWidth="1.2" />
-                <path d="M9.5 9.5L12 12" stroke="#5A5A6A" strokeWidth="1.2" strokeLinecap="round" />
-              </svg>
-              <input value={search} onChange={e => setSearch(e.target.value)}
-                placeholder="Search modules…"
-                className="w-full rounded-xl border pl-9 pr-4 py-2.5 text-sm outline-none"
-                style={{ background: "#0C0C14", borderColor: search ? "rgba(229,9,20,0.35)" : "#1E1E28", color: "#fff" }} />
-            </div>
-            {/* Category filters */}
-            <div className="flex flex-wrap gap-2 items-center">
-              {categories.map(cat => {
-                const col = categoryColors[cat] ?? "#E50914";
-                const isActive = activeCategory === cat;
-                return (
-                  <motion.button key={cat} whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
-                    onClick={() => setActiveCategory(cat)}
-                    className="px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all duration-200"
-                    style={{
-                      background: isActive ? col + "1E" : "transparent",
-                      borderColor: isActive ? col + "55" : "#1E1E28",
-                      color: isActive ? col : "#5A5A6A",
-                    }}>
-                    {cat}
-                  </motion.button>
-                );
-              })}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ─── SECTION GRID ──────────────────────────────────── */}
-        <AnimatePresence mode="wait">
-          {showGrouped ? (
-            <motion.div key="grouped" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
-              {groupedCategories.map((cat, catIdx) => {
-                const catSections = nonFeatured.filter(s => s.category === cat);
-                if (catSections.length === 0) return null;
-                const catColor = categoryColors[cat] ?? "#7A7A7A";
-                return (
-                  <div key={cat} className="mb-8">
-                    <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: catIdx * 0.06 }}
-                      className="flex items-center gap-3 mb-4">
-                      <div className="w-1.5 h-4 rounded-full" style={{ background: catColor }} />
-                      <span className="text-xs font-bold tracking-widest uppercase" style={{ color: catColor }}>{cat}</span>
-                      <div className="flex-1 h-px" style={{ background: catColor + "20" }} />
-                      <span className="text-xs font-mono" style={{ color: "#3A3A4A" }}>{catSections.length} modules</span>
-                    </motion.div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                      {catSections.map((section, i) => (
-                        <SectionCard key={section.id} section={section} user={user} idx={catIdx * 10 + i}
-                          hovered={hoveredCard === section.id}
-                          onHover={setHoveredCard}
-                          onSection={onSection} />
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </motion.div>
-          ) : (
-            <motion.div key={activeCategory + search} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }} transition={{ duration: 0.22 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-              {filtered.map((section, i) => (
-                <SectionCard key={section.id} section={section} user={user} idx={i}
-                  hovered={hoveredCard === section.id}
-                  onHover={setHoveredCard}
-                  onSection={onSection} />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {filtered.length === 0 && !showGrouped && (
-          <div className="text-center py-20" style={{ color: "#5A5A6A" }}>
-            <div className="text-5xl mb-4" style={{ color: "#1E1E28" }}>◎</div>
-            <div className="text-sm">No modules match "{search}"</div>
-          </div>
-        )}
+        <div className="flex justify-center mt-10">
+          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+            onClick={() => onSection("agents")}
+            className="px-7 py-3.5 rounded-xl font-semibold text-sm"
+            style={{ background: "rgba(167,139,250,0.09)", color: "#C4B5FD", border: "1px solid rgba(167,139,250,0.28)" }}>
+            Explore AI Agent Network →
+          </motion.button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-// ── Section Card (extracted for reuse) ────────────────────────────────────
-interface CardProps {
-  section: HubSection;
-  user: { name: string; plan: string };
-  idx: number;
-  hovered: boolean;
-  onHover: (id: string | null) => void;
-  onSection: (id: SectionId) => void;
-}
-function SectionCard({ section, user, idx, hovered, onHover, onSection }: CardProps) {
-  const locked = section.pro && user.plan === "free";
-  const catColor = categoryColors[section.category] ?? "#7A7A7A";
+// ── SECTION 6: REBUILD ─────────────────────────────────────────────────────
+const rebuildModules = [
+  { id: "career-galaxy" as SectionId,  name: "Career Galaxy",          desc: "Map your path across the cosmos of possibility.",           color: "#10B981", icon: "◎" },
+  { id: "future-self" as SectionId,    name: "Future Self Simulator",  desc: "Visualize yourself 1, 3, and 5 years from now.",            color: "#F59E0B", icon: "◆" },
+  { id: "career-cards" as SectionId,   name: "Opportunity Cards",      desc: "Discover career paths you haven't considered yet.",         color: "#5865F2", icon: "◉" },
+  { id: "universe" as SectionId,       name: "Neural Universe",        desc: "Expand knowledge across a living, breathing cosmos.",       color: "#A78BFA", icon: "◇" },
+];
+
+function RebuildSection({ onSection }: { onSection: (id: SectionId) => void }) {
+  const [hovered, setHovered] = useState<string | null>(null);
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: Math.min(idx * 0.015, 0.28), ease: "easeOut" }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
-      onClick={() => locked ? onSection("subscription") : onSection(section.id)}
-      onHoverStart={() => onHover(section.id)}
-      onHoverEnd={() => onHover(null)}
-      className="relative rounded-xl border cursor-pointer overflow-hidden flex flex-col"
-      style={{
-        background: "#0C0C14",
-        borderColor: hovered ? section.color + "35" : "#1E1E28",
-        boxShadow: hovered ? `0 8px 32px ${section.color}14` : "none",
-        transition: "border-color 0.2s, box-shadow 0.2s",
-        minHeight: 185,
-      }}
-    >
-      {/* Top color stripe */}
-      <div className="h-[2px] w-full shrink-0"
-        style={{ background: `linear-gradient(90deg, ${section.color}, ${section.color}40, transparent)` }} />
-      {/* Hover glow overlay */}
-      <div className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-        style={{ background: `radial-gradient(circle at 20% 0%, ${section.color}07, transparent 55%)`, opacity: hovered ? 1 : 0 }} />
+    <section className="relative py-28 px-6 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(16,185,129,0.05) 0%, transparent 60%)" }} />
+      <div className="max-w-5xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-14">
+          <SectionLabel text="Rebuild Phase" color="#10B981" />
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
+            Once You Recover,<br />
+            <span style={{ color: "#10B981" }}>You Rebuild.</span>
+          </h2>
+          <p className="text-base max-w-xl mx-auto" style={{ color: "#6A6A7A" }}>
+            Growth tools unlock after stabilization. Career clarity, future visualization, and opportunity discovery — when you're ready.
+          </p>
+        </motion.div>
 
-      <div className="p-4 flex flex-col flex-1">
-        {/* Top row */}
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
-            style={{ color: catColor, background: catColor + "10" }}>{section.category}</span>
-          <div className="flex gap-1 items-center">
-            {section.hot && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: "#F59E0B", background: "#F59E0B12" }}>HOT</span>}
-            {locked       && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ color: "#5A5A6A", background: "#1A1A22" }}>PRO</span>}
-          </div>
-        </div>
-
-        {/* Icon + name */}
-        <div className="flex items-center gap-3 mb-2.5">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm shrink-0"
-            style={{ background: section.color + "16", color: section.color }}>
-            {section.icon}
-          </div>
-          <div className="font-black text-sm text-white leading-snug" style={{ fontFamily: "'Syne', sans-serif" }}>
-            {section.name}
-          </div>
-        </div>
-
-        {/* Desc */}
-        <div className="text-xs leading-relaxed flex-1" style={{ color: "#5A5A6A" }}>{section.desc}</div>
-
-        {/* Bottom */}
-        <div className="flex items-center justify-between mt-3">
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full"
-              style={{ background: locked ? "#2A2A2E" : "#10B981" }} />
-            <span className="text-xs" style={{ color: locked ? "#5A5A6A" : "#10B981" }}>
-              {locked ? "Pro Required" : "Live"}
-            </span>
-          </div>
-          <motion.div animate={{ x: hovered ? 3 : 0, opacity: hovered ? 1 : 0 }} transition={{ duration: 0.18 }}
-            className="flex items-center gap-1 text-xs font-bold" style={{ color: section.color }}>
-            {locked ? "Upgrade" : "Open"}
-            <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
-              <path d="M2 5H8M5.5 2.5L8 5L5.5 7.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {rebuildModules.map((mod, i) => (
+            <motion.div key={mod.id}
+              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              whileHover={{ y: -5 }}
+              onHoverStart={() => setHovered(mod.id)}
+              onHoverEnd={() => setHovered(null)}
+              onClick={() => onSection(mod.id)}
+              className="relative rounded-2xl border cursor-pointer overflow-hidden p-7 flex items-start gap-5 transition-all"
+              style={{
+                background: "#0C0C14",
+                borderColor: hovered === mod.id ? mod.color + "45" : "#1A1A24",
+                boxShadow: hovered === mod.id ? `0 12px 40px ${mod.color}14` : "none",
+              }}>
+              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${mod.color}55, transparent)` }} />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"
+                style={{ background: mod.color + "14", color: mod.color }}>{mod.icon}</div>
+              <div className="flex-1 min-w-0">
+                <div className="font-black text-white text-base mb-1.5" style={{ fontFamily: "'Syne', sans-serif" }}>{mod.name}</div>
+                <div className="text-sm leading-relaxed" style={{ color: "#6A6A7A" }}>{mod.desc}</div>
+              </div>
+              <motion.svg animate={{ x: hovered === mod.id ? 4 : 0 }} width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-1">
+                <path d="M3 8H13M8.5 3.5L13 8L8.5 12.5" stroke={mod.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </motion.div>
+    </section>
+  );
+}
+
+// ── SECTION 7: EMOTIONAL ENDING ────────────────────────────────────────────
+const endingLines = [
+  "Healing Is Not Linear.",
+  "Growth Is Not Instant.",
+  "But You Should Never Have To Do It Alone.",
+];
+
+function EmotionalEnding({ onSection }: { onSection: (id: SectionId) => void }) {
+  return (
+    <section className="relative py-36 px-6 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(139,92,246,0.08) 0%, transparent 70%)" }} />
+      <div className="max-w-3xl mx-auto text-center">
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mb-12">
+          <SoulOrb size={100} />
+        </motion.div>
+
+        {endingLines.map((line, i) => (
+          <motion.div key={line}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: i * 0.25, ease: "easeOut" }}
+            className="font-black leading-tight mb-3"
+            style={{
+              fontFamily: "'Syne', sans-serif",
+              fontSize: i === 2 ? "clamp(1.5rem, 3.5vw, 2.2rem)" : "clamp(1.8rem, 4vw, 2.8rem)",
+              color: i === 2 ? "#8B5CF6" : "#FFFFFF",
+            }}>
+            {line}
+          </motion.div>
+        ))}
+
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          transition={{ delay: 0.9 }} className="text-base mt-8 mb-10" style={{ color: "#5A5A6A" }}>
+          SoulSync is ready when you are.
+        </motion.p>
+
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+          transition={{ delay: 1.1 }}>
+          <motion.button
+            whileHover={{ scale: 1.06, boxShadow: "0 0 50px rgba(139,92,246,0.55)" }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => onSection("soulsync")}
+            className="px-10 py-4 rounded-2xl font-bold text-white text-base"
+            style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)" }}>
+            Begin Your Recovery
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ── MAIN COMPONENT ─────────────────────────────────────────────────────────
+interface Props {
+  onSection: (id: SectionId) => void;
+  user: { name: string; plan: string };
+}
+
+export default function MainHub({ onSection, user }: Props) {
+  return (
+    <div style={{ background: "#0B0B0F" }}>
+      {/* Dot grid */}
+      <div className="fixed inset-0 pointer-events-none z-0"
+        style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.015) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+
+      <div className="relative z-10">
+        <HeroSection onSection={onSection} userName={user.name} />
+
+        {/* Divider */}
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.25), transparent)" }} />
+        </div>
+
+        <SageDemo onSection={onSection} />
+
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(88,101,242,0.2), transparent)" }} />
+        </div>
+
+        <RecoverySystems onSection={onSection} />
+
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(88,101,242,0.2), transparent)" }} />
+        </div>
+
+        <HumanLayer onSection={onSection} />
+
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.2), transparent)" }} />
+        </div>
+
+        <NeuralIntelligence onSection={onSection} />
+
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(16,185,129,0.2), transparent)" }} />
+        </div>
+
+        <RebuildSection onSection={onSection} />
+
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(139,92,246,0.2), transparent)" }} />
+        </div>
+
+        <EmotionalEnding onSection={onSection} />
+      </div>
+    </div>
   );
 }

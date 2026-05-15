@@ -35,57 +35,69 @@ export default function AuthPage({ onAuth }: Props) {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
-      style={{ background: "#0B0B0F" }}
-    >
+    <div className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden" style={{ background: "#0B0B0F" }}>
       {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div animate={{ opacity: [0.04, 0.08, 0.04] }} transition={{ duration: 6, repeat: Infinity }} className="absolute rounded-full blur-[120px]" style={{ width: 500, height: 500, left: "5%", top: "10%", background: "#E50914" }} />
-        <motion.div animate={{ opacity: [0.03, 0.06, 0.03] }} transition={{ duration: 8, repeat: Infinity, delay: 2 }} className="absolute rounded-full blur-[100px]" style={{ width: 400, height: 400, right: "5%", bottom: "10%", background: "#5865F2" }} />
+        <motion.div animate={{ opacity: [0.05, 0.10, 0.05] }} transition={{ duration: 7, repeat: Infinity }}
+          className="absolute rounded-full blur-[140px]"
+          style={{ width: 500, height: 500, left: "5%", top: "5%", background: "#8B5CF6" }} />
+        <motion.div animate={{ opacity: [0.04, 0.08, 0.04] }} transition={{ duration: 9, repeat: Infinity, delay: 2 }}
+          className="absolute rounded-full blur-[110px]"
+          style={{ width: 380, height: 380, right: "8%", bottom: "10%", background: "#5865F2" }} />
+        <motion.div animate={{ opacity: [0.03, 0.06, 0.03] }} transition={{ duration: 11, repeat: Infinity, delay: 4 }}
+          className="absolute rounded-full blur-[90px]"
+          style={{ width: 260, height: 260, left: "40%", bottom: "5%", background: "#A78BFA" }} />
       </div>
 
-      {/* CRT grain */}
-      <div className="fixed inset-0 pointer-events-none z-[5] opacity-[0.015]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 3px)", backgroundSize: "100% 4px" }} />
+      {/* Dot grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.018) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
       <div className="relative z-10 w-full max-w-md">
         {/* Logo */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="relative">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "#E50914" }}>
-                <span className="text-white font-black text-lg" style={{ fontFamily: "'Syne', sans-serif" }}>A</span>
-              </div>
-              <div className="absolute inset-0 blur-lg opacity-60" style={{ background: "#E50914" }} />
+          {/* SoulSync Orb */}
+          <div className="flex justify-center mb-5">
+            <div className="relative" style={{ width: 56, height: 56 }}>
+              {[1, 0.65].map((s, i) => (
+                <motion.div key={i}
+                  animate={{ scale: [s, s * 1.18, s], opacity: [0.1, 0.25, 0.1] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: i * 0.6, ease: "easeInOut" }}
+                  className="absolute inset-0 rounded-full"
+                  style={{ background: "radial-gradient(circle, #8B5CF6, #5865F2 70%)", filter: "blur(4px)" }}
+                />
+              ))}
+              <motion.div
+                animate={{ scale: [1, 1.06, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 rounded-full flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)", boxShadow: "0 0 28px rgba(139,92,246,0.65)" }}
+              >
+                <span className="text-white font-black text-xl">◈</span>
+              </motion.div>
             </div>
-            <span className="text-2xl font-black tracking-widest" style={{ fontFamily: "'Syne', sans-serif", color: "#fff" }}>
-              APEX<span style={{ color: "#E50914" }}>OS</span>
-            </span>
           </div>
-          <div className="text-sm" style={{ color: "#7A7A7A" }}>The AI Operating System For Human Potential</div>
+          <h1 className="text-2xl font-black tracking-widest mb-1" style={{ fontFamily: "'Syne', sans-serif", color: "#fff" }}>
+            SOUL<span style={{ color: "#8B5CF6" }}>SYNC</span>
+          </h1>
+          <div className="text-xs tracking-widest uppercase" style={{ color: "#5A5A6A", fontFamily: "'Syne', sans-serif" }}>
+            The AI Companion That Evolves With You
+          </div>
         </motion.div>
 
         {/* Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="rounded-2xl border overflow-hidden"
-          style={{ background: "#0E0E14", borderColor: "#2A2A2E" }}
-        >
+          style={{ background: "#0C0C16", borderColor: "#1C1C2A" }}>
           {/* Tabs */}
-          <div className="flex border-b" style={{ borderColor: "#2A2A2E" }}>
+          <div className="flex border-b" style={{ borderColor: "#1C1C2A" }}>
             {(["login", "signup"] as const).map((t) => (
-              <button
-                key={t}
-                onClick={() => { setTab(t); setError(""); }}
+              <button key={t} onClick={() => { setTab(t); setError(""); }}
                 className="flex-1 py-4 text-sm font-bold capitalize transition-all"
                 style={{
-                  color: tab === t ? "#fff" : "#7A7A7A",
-                  borderBottom: tab === t ? "2px solid #E50914" : "2px solid transparent",
-                  background: tab === t ? "rgba(229,9,20,0.05)" : "transparent",
-                }}
-              >
+                  color: tab === t ? "#fff" : "#4A4A5A",
+                  borderBottom: tab === t ? "2px solid #8B5CF6" : "2px solid transparent",
+                  background: tab === t ? "rgba(139,92,246,0.06)" : "transparent",
+                }}>
                 {t === "login" ? "Sign In" : "Create Account"}
               </button>
             ))}
@@ -97,75 +109,72 @@ export default function AuthPage({ onAuth }: Props) {
                 <div className="space-y-4 mb-6">
                   {tab === "signup" && (
                     <div>
-                      <label className="block text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#7A7A7A" }}>Full Name</label>
+                      <label className="block text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#5A5A6A" }}>Full Name</label>
                       <input
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={name} onChange={(e) => setName(e.target.value)}
                         placeholder="Your name"
                         className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all"
-                        style={{ background: "#141420", borderColor: name ? "rgba(229,9,20,0.5)" : "#2A2A2E", color: "#fff" }}
+                        style={{ background: "#10101A", borderColor: name ? "rgba(139,92,246,0.5)" : "#1C1C2A", color: "#fff" }}
                       />
                     </div>
                   )}
                   <div>
-                    <label className="block text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#7A7A7A" }}>Email</label>
+                    <label className="block text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#5A5A6A" }}>Email</label>
                     <input
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@example.com"
-                      type="email"
+                      value={email} onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@example.com" type="email"
                       className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all"
-                      style={{ background: "#141420", borderColor: email ? "rgba(229,9,20,0.5)" : "#2A2A2E", color: "#fff" }}
+                      style={{ background: "#10101A", borderColor: email ? "rgba(139,92,246,0.5)" : "#1C1C2A", color: "#fff" }}
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#7A7A7A" }}>Password</label>
+                    <label className="block text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#5A5A6A" }}>Password</label>
                     <input
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
-                      type="password"
+                      value={password} onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••" type="password"
                       onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                       className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all"
-                      style={{ background: "#141420", borderColor: password ? "rgba(229,9,20,0.5)" : "#2A2A2E", color: "#fff" }}
+                      style={{ background: "#10101A", borderColor: password ? "rgba(139,92,246,0.5)" : "#1C1C2A", color: "#fff" }}
                     />
                   </div>
                 </div>
 
                 {error && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs mb-4 px-3 py-2 rounded-lg" style={{ color: "#E50914", background: "rgba(229,9,20,0.1)", border: "1px solid rgba(229,9,20,0.2)" }}>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                    className="text-xs mb-4 px-3 py-2 rounded-lg"
+                    style={{ color: "#EC4899", background: "rgba(236,72,153,0.08)", border: "1px solid rgba(236,72,153,0.2)" }}>
                     {error}
                   </motion.div>
                 )}
 
                 <motion.button
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 24px rgba(229,9,20,0.3)" }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 0 28px rgba(139,92,246,0.4)" }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleSubmit}
                   disabled={loading}
                   className="w-full py-3.5 rounded-xl font-bold text-sm text-white mb-3 transition-all"
-                  style={{ background: loading ? "#2A2A2E" : "#E50914", color: loading ? "#7A7A7A" : "#fff" }}
+                  style={{ background: loading ? "#1C1C2A" : "linear-gradient(135deg, #8B5CF6, #5865F2)", color: loading ? "#5A5A6A" : "#fff" }}
                 >
                   {loading ? (
                     <motion.span animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 1, repeat: Infinity }}>
-                      Authenticating…
+                      Connecting…
                     </motion.span>
-                  ) : tab === "login" ? "Sign In to APEX OS" : "Create My Account"}
+                  ) : tab === "login" ? "Sign In to SoulSync" : "Begin My Recovery"}
                 </motion.button>
 
                 <div className="flex items-center gap-3 my-4">
-                  <div className="flex-1 h-px" style={{ background: "#2A2A2E" }} />
-                  <span className="text-[10px]" style={{ color: "#7A7A7A" }}>or</span>
-                  <div className="flex-1 h-px" style={{ background: "#2A2A2E" }} />
+                  <div className="flex-1 h-px" style={{ background: "#1C1C2A" }} />
+                  <span className="text-xs" style={{ color: "#3A3A4A" }}>or</span>
+                  <div className="flex-1 h-px" style={{ background: "#1C1C2A" }} />
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, borderColor: "rgba(139,92,246,0.35)" }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleDemo}
                   disabled={loading}
-                  className="w-full py-3.5 rounded-xl font-bold text-sm border transition-all"
-                  style={{ color: "#B3B3B3", borderColor: "#2A2A2E", background: "transparent" }}
+                  className="w-full py-3.5 rounded-xl font-semibold text-sm border transition-all"
+                  style={{ color: "#8A8A9A", borderColor: "#1C1C2A", background: "transparent" }}
                 >
                   Continue as Guest (Demo Mode)
                 </motion.button>
@@ -176,8 +185,11 @@ export default function AuthPage({ onAuth }: Props) {
 
         {/* Social proof */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-center mt-6">
-          <div className="flex items-center justify-center gap-3 text-xs" style={{ color: "#7A7A7A" }}>
-            <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full" style={{ background: "#10B981" }} />12,847 users</span>
+          <div className="flex items-center justify-center gap-3 text-xs" style={{ color: "#4A4A5A" }}>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#10B981" }} />
+              12,847 users
+            </span>
             <span>·</span>
             <span>11 AI Agents</span>
             <span>·</span>

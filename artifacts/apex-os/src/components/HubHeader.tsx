@@ -30,7 +30,7 @@ const navCategories: NavCategory[] = [
   },
   {
     label: "Intelligence",
-    color: "#E50914",
+    color: "#F97316",
     sections: [
       { id: "agents",      name: "AI Agent Network",     desc: "11 autonomous intelligences",     icon: "◈", hot: true },
       { id: "debate",      name: "Neural Debate Arena",  desc: "Agents debate your decisions",    icon: "◉" },
@@ -110,19 +110,19 @@ export default function HubHeader({ user, onSection }: Props) {
         style={{ background: "rgba(9,9,15,0.95)", borderColor: "#1E1E24", backdropFilter: "blur(24px)" }}
       >
         {/* Top accent line */}
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, #E50914, transparent)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, #8B5CF6, #5865F2, transparent)" }} />
 
         <div className="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between gap-6">
           {/* Logo */}
           <button onClick={() => setMobileOpen(false)} className="flex items-center gap-2 shrink-0">
-            <div className="relative">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "#E50914" }}>
-                <span className="text-white font-black text-sm" style={{ fontFamily: "'Syne', sans-serif" }}>A</span>
+            <div className="relative" style={{ width: 28, height: 28 }}>
+              <div className="absolute inset-0 rounded-lg blur-md opacity-80" style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)" }} />
+              <div className="relative w-full h-full rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #8B5CF6, #5865F2)" }}>
+                <span className="text-white font-black text-sm">◈</span>
               </div>
-              <div className="absolute inset-0 blur-md opacity-70" style={{ background: "#E50914" }} />
             </div>
             <span className="font-black tracking-widest text-sm" style={{ fontFamily: "'Syne', sans-serif", color: "#fff" }}>
-              APEX<span style={{ color: "#E50914" }}>OS</span>
+              SOUL<span style={{ color: "#8B5CF6" }}>SYNC</span>
             </span>
           </button>
 
