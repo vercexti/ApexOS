@@ -6,3 +6,9 @@ id = "CBUyjTHr13nGaxuRxPwFi"
 uri = "file://CHANGELOG.txt"
 type = "text"
 title = "APEX OS — Full Build Changelog"
+
+[[outputs]]
+id = "putAzIEkoyhtUtZNIUfBU"
+uri = "file://APEX_OS_OVERVIEW.txt"
+type = "text"
+title = "APEX OS — Feature Overview"

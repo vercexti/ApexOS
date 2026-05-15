@@ -1,0 +1,83 @@
+APEX OS — Feature Overview
+==========================
+The AI Operating System for Human Potential
+v2.0 · Built for hackathon demo
+
+─── CORE MODULES (25 total) ───────────────────────────────
+
+WELLNESS
+  • SoulSync Companion      — Emotionally intelligent AI (Sage), adapts to mood in real time
+  • Daily Recovery          — Quests, mood tracking, XP streaks
+  • Psychologist Connect    — Verified professionals from $12/session
+  • Breathing & Grounding   — 4-4-6 anxiety reduction protocol
+  • Ambient Soundscapes     — Focus, calm, and sleep audio streams
+  • Focus Sprint            — 25-min deep work engine, ADHD-friendly
+
+INTELLIGENCE
+  • AI Agent Network        — 11 autonomous intelligences running in parallel
+  • Neural Debate Arena     — Agents debate your decisions in real time
+  • Strategic Dashboard     — Live metrics, neural heatmap, agent activity stream
+  • AI Terminal             — Neural command interface (analyze, simulate, deploy)
+  • Neural Architecture     — Cognitive system visualization, live thought map
+  • Research Intelligence   — Deep scan 10,000+ sources, A+ grade reports
+
+CAREER
+  • Career Galaxy           — Cosmic career path map, interactive node system
+  • Opportunity Cards       — Netflix-style career browser with fullscreen modal
+  • Future Self Simulator   — 1 / 3 / 5 year projection engine
+  • Network Engine          — High-value connection finder, 34% reply rate
+
+LEARNING
+  • Study Command Center    — Mission-control for accelerated learning
+  • Neural Universe         — Knowledge cosmos, interactive concept clusters
+  • Focus Sprint            — 25-min ADHD-friendly deep work timer
+
+AUTOMATION
+  • Workflow Universe       — 6 autonomous pipeline engines
+  • Decision Simulator      — 200-scenario Monte Carlo stress-testing
+  • Finance Projector       — Wealth trajectory and $1M+ path simulation
+  • Automation Builder      — Custom workflow architect, deploy instantly
+
+PERSONAL
+  • My Profile              — Account, achievements, neural score
+  • Subscription & Plans    — Free → Pro → Elite plan management
+  • Neural Onboarding       — Personalized OS intelligence profile setup
+
+─── KEY FEATURES ──────────────────────────────────────────
+
+  • Cinematic Boot Sequence     — Particle intro with console lines, skip option
+  • Custom Red Glowing Cursor   — APEX OS signature cursor effect
+  • SoulSync Ambient            — Passive ambient wellness layer
+  • Neural Score Ring           — Live personal intelligence score (0–100)
+  • Daily Intelligence Brief    — Rotating AI-generated daily briefing
+  • Live Activity Ticker        — Real-time agent activity scrolling bar
+  • Quick Actions Bar           — 6 one-tap module launchers on main hub
+  • Featured Core Cards         — 4 hero cards: SoulSync, Agents, Workflows, Career Galaxy
+  • Module Search & Filter      — Search + category filter across all 25 modules
+  • ApexHUD                     — Floating heads-up display overlay
+  • Guided Tour Bar             — Onboarding guidance system
+  • Lenis Smooth Scroll         — Premium smooth scroll after boot
+
+─── NAVIGATION ────────────────────────────────────────────
+
+  Header categories: Wellness · Intelligence · Career · Learning · Automation
+  Each category opens a dropdown with all sub-sections
+
+─── TECH STACK ────────────────────────────────────────────
+
+  Frontend : React + Vite + Tailwind CSS v4
+  Animation: Framer Motion + GSAP + Lenis
+  Fonts    : Inter (body), Syne (headlines)
+  API      : Express 5 (minimal, frontend-only demo)
+  Runtime  : Node.js 24, TypeScript 5.9, pnpm workspaces
+
+─── STATS ─────────────────────────────────────────────────
+
+  12,847 Users · 11 AI Agents · 25 Sections · 99.97% Uptime · 4.9/5 Rating
+
+─── COLOR SYSTEM ──────────────────────────────────────────
+
+  Background : #0B0B0F   Card    : #1C1C1F
+  Accent Red : #E50914   Glow    : #FF3B47
+  AI Blue    : #5865F2   Green   : #10B981
+  Text White : #FFFFFF   Muted   : #7A7A7A
