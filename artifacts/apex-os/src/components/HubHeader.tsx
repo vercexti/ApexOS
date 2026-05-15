@@ -44,7 +44,7 @@ const navCategories: NavCategory[] = [
     label: "Career",
     color: "#10B981",
     sections: [
-      { id: "career-galaxy",  name: "Celestial Map",           desc: "Interactive stellar career atlas", icon: "◎", hot: true },
+      { id: "career-galaxy",  name: "Career Galaxy",            desc: "Cosmic career path map",          icon: "◎", hot: true },
       { id: "career-cards",   name: "Opportunity Cards",       desc: "Netflix-style career browser",    icon: "◉" },
       { id: "future-self",    name: "Future Self Simulator",   desc: "1 / 3 / 5 year projection",      icon: "◆" },
       { id: "network-engine", name: "Network Engine",          desc: "High-value connection finder",    icon: "◇" },
@@ -235,12 +235,12 @@ export default function HubHeader({ user, onSection }: Props) {
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-bold text-white truncate">{sec.name}</span>
+                          <span className="text-sm font-bold text-white truncate">{sec.name}</span>
                           {sec.hot && (
-                            <span className="text-[8px] font-bold px-1 py-0.5 rounded shrink-0" style={{ color: "#F59E0B", background: "rgba(245,158,11,0.15)" }}>HOT</span>
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0" style={{ color: "#F59E0B", background: "rgba(245,158,11,0.15)" }}>HOT</span>
                           )}
                         </div>
-                        <div className="text-[10px] truncate mt-0.5" style={{ color: "#7A7A7A" }}>{sec.desc}</div>
+                        <div className="text-xs truncate mt-0.5" style={{ color: "#7A7A7A" }}>{sec.desc}</div>
                       </div>
                     </motion.button>
                   ))}
@@ -248,13 +248,13 @@ export default function HubHeader({ user, onSection }: Props) {
 
                 {/* Footer row */}
                 <div className="mt-3 pt-3 border-t flex items-center justify-between" style={{ borderColor: "#1E1E24" }}>
-                  <span className="text-[10px] font-mono" style={{ color: "#7A7A7A" }}>
+                  <span className="text-xs font-mono" style={{ color: "#7A7A7A" }}>
                     {activeCat.sections.length} sections · {activeCat.label} module
                   </span>
                   <motion.button
                     whileHover={{ x: 2 }}
                     onClick={() => go(activeCat.sections[0]!.id)}
-                    className="text-[10px] font-semibold flex items-center gap-1"
+                    className="text-xs font-semibold flex items-center gap-1"
                     style={{ color: activeCat.color }}
                   >
                     Enter {activeCat.label}
@@ -291,7 +291,7 @@ export default function HubHeader({ user, onSection }: Props) {
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full" style={{ background: cat.color }} />
                       <span className="text-sm font-bold text-white">{cat.label}</span>
-                      <span className="text-[10px]" style={{ color: "#7A7A7A" }}>{cat.sections.length} sections</span>
+                      <span className="text-xs" style={{ color: "#7A7A7A" }}>{cat.sections.length} sections</span>
                     </div>
                     <motion.svg
                       animate={{ rotate: mobileExpanded === cat.label ? 180 : 0 }}
@@ -323,7 +323,7 @@ export default function HubHeader({ user, onSection }: Props) {
                             </div>
                             <div>
                               <div className="text-xs font-semibold text-white">{sec.name}</div>
-                              <div className="text-[10px]" style={{ color: "#7A7A7A" }}>{sec.desc}</div>
+                              <div className="text-xs" style={{ color: "#7A7A7A" }}>{sec.desc}</div>
                             </div>
                           </button>
                         ))}
